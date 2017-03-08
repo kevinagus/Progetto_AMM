@@ -26,14 +26,29 @@ and open the template in the editor.
             </ul>
         </nav>
         <hr/>
-        <!Create un form per l’inserimento dei dati del profilo all’interno della pagina profilo.html. 
-        Il form deve richiedere all’utente le seguenti informazioni, utilizzando le tipologie di input corrette:
-        Nome dell’utente
-        Cognome dell’utente
-        URL di una immagine per il profilo
-        Frase di presentazione
-        Data di nascita
-        Password
-        Conferma password>
+        <form action="profili.txt" method="post">
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" id="nome"/>
+            <br/><br/>
+            <label for="cognome">Cognome:</label>
+            <input type="text" name="cognome" id="cognome"/>
+            <br/><br/>
+            <label for="url">URL foto profilo:</label>
+            <input type="text" name="url" id="url"/>
+            <br/><br/>
+            <label for="frase">Frase di presentazione:</label>
+            <textarea rows="4" cols="20" name="frase" id="frase"></textarea>
+            <br/><br/>
+            <label for="data">Data di nascita:</label>
+            <input type="text" name="data" id="data" value="GG/MM/AAAA"/>
+            <br/><br/>
+            <label for="pswd">Password</label>
+            <input type="password" name="pswd" id="pswd"/>
+            <br/><br/>
+            <label for="cpswd">Conferma password</label>
+            <input type="password" name="cpswd" id="cpswd"/>
+            <br/><br/>
+            <button type="submit">OK!</button>
+        </form>
     </body>
 </html>
