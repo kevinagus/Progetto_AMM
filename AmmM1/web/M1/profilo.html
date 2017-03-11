@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>Profilo</title>
@@ -21,34 +16,30 @@ and open the template in the editor.
         <nav>
             <ul>
                 <li><a href="descrizione.html">Informazioni</a></li>
-                <br/>
                 <li><a href="login.html">Login</a></li>
             </ul>
         </nav>
-        <hr/>
-        <form action="profili.txt" method="post">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome"/>
-            <br/><br/>
-            <label for="cognome">Cognome:</label>
-            <input type="text" name="cognome" id="cognome"/>
-            <br/><br/>
-            <label for="url">URL foto profilo:</label>
-            <input type="text" name="url" id="url"/>
-            <br/><br/>
-            <label for="frase">Frase di presentazione:</label>
-            <textarea rows="4" cols="20" name="frase" id="frase"></textarea>
-            <br/><br/>
-            <label for="data">Data di nascita:</label>
-            <input type="text" name="data" id="data" value="GG/MM/AAAA"/>
-            <br/><br/>
-            <label for="pswd">Password</label>
-            <input type="password" name="pswd" id="pswd"/>
-            <br/><br/>
-            <label for="cpswd">Conferma password</label>
-            <input type="password" name="cpswd" id="cpswd"/>
-            <br/><br/>
-            <button type="submit">OK!</button>
-        </form>
+        <div>
+            <h2>Iscriviti per vedere i post dei tuoi amici</h2>
+                <form action="#" method="post">
+                <ul>
+                    <li><label for="nome">Nome:</label></li>
+                    <input type="text" name="nome" id="nome"/>
+                    <li><label for="cognome">Cognome:</label></li>
+                    <input type="text" name="cognome" id="cognome"/>
+                    <li><label for="url">URL foto profilo:</label></li>
+                    <input type="text" name="url" id="url"/>
+                    <li><label for="frase">Frase di presentazione:</label></li>
+                    <textarea rows="4" cols="20" name="frase" id="frase"></textarea>
+                    <li><label for="data">Data di nascita:</label></li>
+                    <input type="text" name="data" id="data" value="GG/MM/AAAA"/>
+                    <li><label for="pswd">Password:</label></li>
+                    <input type="password" name="pswd" id="pswd"/>
+                    <li><label for="cpswd">Conferma password:</label></li>
+                    <input type="password" name="cpswd" id="cpswd"/>
+                </ul>
+                <button type="submit">Iscriviti!</button>
+            </form>
+        </div>
     </body>
 </html>
