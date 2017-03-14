@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="it-IT">
     <head>
         <title>Profilo</title>
         <meta charset="UTF-8">
@@ -9,7 +9,7 @@
     </head>
     <body>
         <header>
-            <div>
+            <div id="divProfilo">
                 <h1>Nerdbook Profilo</h1>
             </div>
         </header>
@@ -19,26 +19,40 @@
                 <li><a href="login.html">Login</a></li>
             </ul>
         </nav>
-        <div>
+        <div id="iscriviti">
             <h2>Iscriviti per vedere i post dei tuoi amici</h2>
-                <form action="#" method="post">
-                <ul>
-                    <li><label for="nome">Nome:</label></li>
+            <form action="#" method="post">
+                <div id="divNome">
+                    <label for="nome">Nome:</label>
                     <input type="text" name="nome" id="nome"/>
-                    <li><label for="cognome">Cognome:</label></li>
+                </div>
+                <div id="divCognome">
+                    <label for="cognome">Cognome:</label>
                     <input type="text" name="cognome" id="cognome"/>
-                    <li><label for="url">URL foto profilo:</label></li>
+                </div>
+                <div id="divFoto">
+                    <label for="url">URL foto profilo:</label>
                     <input type="text" name="url" id="url"/>
-                    <li><label for="frase">Frase di presentazione:</label></li>
+                </div>
+                <div id="divFrase">
+                    <label for="frase">Frase di presentazione:</label>
                     <textarea rows="4" cols="20" name="frase" id="frase"></textarea>
-                    <li><label for="data">Data di nascita:</label></li>
-                    <input type="text" name="data" id="data" value="GG/MM/AAAA"/>
-                    <li><label for="pswd">Password:</label></li>
+                </div>
+                <div id="divData">
+                    <label for="data">Data di nascita:</label>
+                    <input type="date" name="data" id="data"/>
+                </div>
+                <div id="divPswd">
+                    <label for="pswd">Password:</label>
                     <input type="password" name="pswd" id="pswd"/>
-                    <li><label for="cpswd">Conferma password:</label></li>
+                </div>
+                <div id="divCpswd">
+                    <label for="cpswd">Conferma password:</label>
                     <input type="password" name="cpswd" id="cpswd"/>
-                </ul>
-                <button type="submit">Iscriviti!</button>
+                </div>
+                <div id="divButton">
+                    <button type="submit">Iscriviti!</button>
+                </div>
             </form>
         </div>
     </body>
