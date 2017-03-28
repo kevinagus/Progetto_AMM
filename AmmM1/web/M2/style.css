@@ -1,0 +1,43 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 28-mar-2017, 9.46.26
+    Author     : Kevin
+*/
+
+body{
+    background-color: #ffff66;
+    font-family: "serif", Times;
+    font-style: normal;
+    color: #660000;
+}
+
+header{
+    border-style: solid;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+h1{
+    font-family: "Arial", Times;
+    font-style: italic;
+    font-weight: bold;
+    
+}
+
+h2{
+    font-family: "Verdana",Times;
+    font-style: normal;
+}
+
+h3{
+    font-style: normal;
+    font-family: "Georgia",Times;
+}
+
+
+
+
