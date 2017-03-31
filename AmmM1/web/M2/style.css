@@ -9,35 +9,57 @@ and open the template in the editor.
 */
 
 body{
-    background-color: #ffff66;
+    background-color:#ffffcc;
     font-family: "serif", Times;
     font-style: normal;
     color: #660000;
 }
 
 header{
+    width: 300px;
     border-style: solid;
-    padding-left: 10px;
-    padding-right: 10px;
 }
 
 h1{
     font-family: "Arial", Times;
     font-style: italic;
     font-weight: bold;
-    
 }
 
 h2{
     font-family: "Verdana",Times;
     font-style: normal;
+    color:forestgreen;
+        
 }
 
 h3{
     font-style: normal;
     font-family: "Georgia",Times;
+    color: brown        
+}
+/*gestione link*/
+a:active{
+    color:black;
+}
+a:link{
+    color:darkblue;  
+    text-decoration: underline;
+}
+a:visited{
+    color:#cc0000;
+}
+a:hover{
+    color:#b84dff;
+    text-decoration:underline;
 }
 
-
+input{
+    font-family: "Verdana",Times;
+    border: 2px solid #3366ff;
+    background-color:#3CBC8D;
+    color:white;
+    padding-left: 5px;
+}
 
 
