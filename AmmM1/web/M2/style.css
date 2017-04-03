@@ -116,6 +116,8 @@ input[type=date]{
 }
 textarea{
     display:block;
+    background-color:#993300;
+    color:white;
 }
 input[type=password]{
     width: 60%;
