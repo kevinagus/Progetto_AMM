@@ -16,7 +16,8 @@ body{
 }
 
 header{
-    font-family: "Arial", Times;
+    background-color: #ff6666;
+    font-family: "serif", Times;
     font-style: italic;
     font-weight: bold;
     border-style: solid;
@@ -35,7 +36,7 @@ h2{
 h3{
     font-style: normal;
     font-family: "Georgia",Times;
-    color: brown        
+    color: brown;       
 }
 /*gestione link*/
 a:active{
@@ -80,10 +81,11 @@ p{
     display:block;
     width: 200px;
     font-weight:bold;
+    color: #006600;
 }
 
 .button{
-    background-color:#993300;
+    background-color:#006600;
     color:white;
     width: 63%;
     margin-top:20px;
@@ -93,18 +95,21 @@ nav{
     text-align: center;
     display: block;
     font-size: 20px;
-}
-nav ol,nav li{
-    display: inline-block;
-    font-family: "serif";
+    background-color:#cccccc;
 }
 nav li{
+    display: inline-block;
+    font-family: "serif";
     padding-left: 20px;
     padding-right: 20px;
     border-right: 2px solid;
 }
 nav li:last-child {
     border-right: 0px solid;
+}
+ul{
+    margin-top:10px;
+    margin-bottom:10px;
 }
 
 input[type=text]{  
@@ -125,7 +130,7 @@ input[type=password]{
 }
 #iscriviti{
     border-style: solid;
-    padding-left: 20%;
+    padding-left: 10%;
     padding-top:3%;
     padding-bottom:3%;
     margin-left: 20%;
@@ -136,12 +141,10 @@ input[type=password]{
     clear: both;
     text-align: center;
 }
-#formIscri div{
-    display: block;
-}
 
 #divPost1,#divPost2,#divPost3{
-    margin: 5%;
+    margin-bottom: 10px;
+    margin-top:10px;
     padding: 2%;
     border-style: solid;
 }
@@ -149,13 +152,20 @@ input[type=password]{
 #divSom{
     margin-top: 10px;
     border-style: solid;
-    width: 200px;
+    width: 160px;
     float: left;
+    padding-left:20px;
+    float:left;
 }
 
 #focus{
     float:left;
-    margin-top: 10px;
+    width: 76%;
+    margin-left:3%;
+    margin-top:10px;
     border-style: solid;
-    padding: 4%;
+    padding: 3%;
+}
+label{
+    color: #006600;
 }
