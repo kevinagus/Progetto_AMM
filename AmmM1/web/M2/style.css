@@ -16,6 +16,7 @@ body{
 }
 
 #utenti{
+    background-color: white;
     border-style:solid;
     width:200px;
     padding-left: 10px;
@@ -25,11 +26,6 @@ body{
 
 #utenti li{
     list-style-type: none;
-}
-
-#picutente{
-    background-image: url(img/anagrafica.png);
-    background-repeat: no-repeat;
 }
 
 .pannello li a{
@@ -64,18 +60,20 @@ h3{
 /*gestione link*/
 a:active{
     color:black;
+    text-decoration: none;
 }
 a:link{
     color:darkblue;  
-    text-decoration: underline;
+    text-decoration: none;
 }
 a:visited{
-    color:#cc0000;
+    color:#000000;
+    text-decoration: none;
 }
 a:hover{
     font-weight: bold;
     color:#b84dff;
-    text-decoration:underline;
+    text-decoration: none;
 }
 
 input{
@@ -92,8 +90,9 @@ p{
 }
 
 #divAccesso{
+    background-color: white;
     border-style:solid;
-    padding: 3%;
+    padding:5%;
     margin-left:auto;
     margin-right:auto;
     margin-top: 100px;
@@ -126,13 +125,10 @@ nav{
 nav li{
     display: inline-block;
     font-family: "serif";
+    margin-bottom:5px;
     padding-left: 20px;
     padding-right: 20px;
     border-right: 2px solid;
-}
-
-nav li:last-child {
-    border-right: 0px solid;
 }
 
 ul{
@@ -167,6 +163,7 @@ textarea{
 }
 
 #iscriviti{
+    background-color: white;
     float:left;
     border-style: solid;
     padding: 5%;
@@ -180,6 +177,7 @@ textarea{
 }
 
 #divPost1,#divPost2,#divPost3{
+    background-color: white;
     margin-bottom: 10px;
     margin-top:10px;
     padding: 2%;
@@ -187,6 +185,7 @@ textarea{
 }
 
 #divSom{
+    background-color: white;
     margin-top: 10px;
     padding-right:10px;
     border-style: solid;
@@ -207,6 +206,24 @@ textarea{
 label{
     color: #006600;
     font-size: 18px;
+}
+
+.ProfPic{
+    height: auto;
+}
+
+.active{
+    border-color: #ff6666;
+    border-style:solid;
+    border-radius: 25px;
+    background-color:#ffffcc;
+    box-shadow: 0 5px 10px;
+}
+
+.other{
+    border-color: #ff6666;
+    border-style: solid;
+    border-radius: 25px;
 }
 
 @media screen and (max-width: 480px)
@@ -242,12 +259,6 @@ label{
         width: 78%;
     }
     
-    nav li{
-        padding-left: 20px;
-        padding-right: 20px;
-        border-right: none;
-    }
-    
     #divAccesso{
         width: 40%;
         margin-left:auto;
@@ -255,7 +266,6 @@ label{
     }
     
     .ProfPic{
-        height:auto;
         width: 90%;
     }
     
@@ -302,7 +312,6 @@ label{
     }
     
     .ProfPic{
-        height:auto;
         width: 90%;
     }
 }
@@ -314,4 +323,27 @@ label{
         float: left;
         margin-left: 10px;
     }
+    /*immagine decorativa posta all'interno del 
+        form per l'inserimento delle credenziali utente*/
+    #divAccesso{
+        padding-left: 15%;
+        background-image: url(img/login.png);
+        background-repeat: no-repeat;
+    }
+    /*Immagine decorativa posta all'interno del form
+        di iscrizione*/
+    #iscriviti{
+        padding-left: 15%;
+        background-image: url(img/iscrizione.png);
+        background-repeat: no-repeat;
+    }
+    
+}
+
+/*Immagine informativa posta in corrispondenza di 
+    ogni utente registrato,ha il compito di colpire l'attenzione dell'utente
+        poichè esso individui i profili degli utenti già scritti.*/
+#picutente{
+    background-image: url(img/anagrafica.png);
+    background-repeat: no-repeat;
 }
