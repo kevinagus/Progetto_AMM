@@ -15,6 +15,29 @@ body{
     color: #660000;
 }
 
+#utenti{
+    border-style:solid;
+    width:200px;
+    padding-left: 10px;
+    margin-top:10px;
+    float: left;
+}
+
+#utenti li{
+    list-style-type: none;
+}
+
+#picutente{
+    background-image: url(img/anagrafica.png);
+    background-repeat: no-repeat;
+}
+
+.pannello li a{
+    display:block;
+    line-height:35px;
+    padding-left: 50px;
+}
+
 header{
     background-color: #ff6666;
     font-family: "serif", Times;
@@ -70,12 +93,11 @@ p{
 
 #divAccesso{
     border-style:solid;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 5%;
-    margin-left:35%;
-    margin-right:25%;
+    padding: 3%;
+    margin-left:auto;
+    margin-right:auto;
     margin-top: 100px;
+    width: 30%;
 }
 
 .ilogin{
@@ -88,8 +110,9 @@ p{
 .button{
     background-color:#006600;
     color:white;
-    width: 63%;
+    width: 62%;
     margin-top:20px;
+    height: 28px;
 }
 
 nav{
@@ -120,33 +143,39 @@ ul{
 input[type=text]{  
     width: 60%;
     display:block;
+    margin-bottom:6px;
 }
 
 input[type=password]{
     width: 60%;
     display:block;
+    margin-bottom:6px;
 }
 
 input[type=date]{
     display:block;
+    width:29%;
+    margin-bottom:6px;
 }
+
 textarea{
     display:block;
     background-color:#993300;
+    border: 2px solid #3366ff;
     color:white;
+    margin-bottom:6px;
 }
 
 #iscriviti{
+    float:left;
     border-style: solid;
-    padding-left: 10%;
-    padding-top:3%;
-    padding-bottom:3%;
-    margin-left: 20%;
-    margin-right: 20%;
+    padding: 5%;
+    margin-left:10px;
+    margin-bottom: 10px;
+    width: 40%;
     font-weight:bold;
 }
 #scritta{
-    clear: both;
     text-align: center;
 }
 
@@ -161,7 +190,7 @@ textarea{
     margin-top: 10px;
     padding-right:10px;
     border-style: solid;
-    width: 160px; /*width 1024*/
+    width: 160px;
     padding-left:10px;
     float:left;
 }
@@ -177,6 +206,7 @@ textarea{
 
 label{
     color: #006600;
+    font-size: 18px;
 }
 
 @media screen and (max-width: 480px)
@@ -201,6 +231,9 @@ label{
         width: 84%;
     }
     
+    input[type=date]{
+        width:55%;
+    }
     input[type=text]{  
         width: 78%;
     }
@@ -219,5 +252,66 @@ label{
         width: 40%;
         margin-left:auto;
         margin-right:auto;
+    }
+    
+    .ProfPic{
+        height:auto;
+        width: 90%;
+    }
+    
+    textarea{
+        width: 79%;
+    }
+ 
+    #iscriviti{
+        float:none;
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #divAccesso{
+        width: 65%;
+    }
+    
+    #utenti{
+        display:none;
+    }
+}
+
+@media screen and (max-width: 1023px) and (min-width: 481px){
+    
+    #focus{
+        float: left;
+        width: 48%;
+        border-style: solid;
+        margin-top:10px;
+        margin-bottom:10px;
+        padding: 3%;
+        background-color: white;
+    }
+    
+    #divAccesso{
+        width: 40%;
+    }
+    
+    #divPost{
+        width: 49%;
+        float: left;
+        margin-left: 10px;
+    }
+    
+    .ProfPic{
+        height:auto;
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    
+     #divPost{
+        width: 60%;
+        float: left;
+        margin-left: 10px;
     }
 }
