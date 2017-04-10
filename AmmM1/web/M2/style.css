@@ -18,7 +18,7 @@ body{
 #utenti{
     background-color: white;
     border-style:solid;
-    width:200px;
+    width:205px;
     padding-left: 10px;
     margin-top:10px;
     float: left;
@@ -35,7 +35,7 @@ body{
 }
 
 header{
-    background-color: #ff6666;
+    background-color: #99bbff;
     font-family: "serif", Times;
     font-style: italic;
     font-weight: bold;
@@ -78,9 +78,10 @@ a:hover{
 
 input{
     font-family: "Verdana",Times;
+    font-weight: bold;
     border: 2px solid #3366ff;
-    background-color:#993300;
-    color:white;
+    background-color: #cc9966;
+    color:black;
     padding-left: 5px;
 }
 
@@ -136,10 +137,19 @@ ul{
     margin-bottom:10px;
 }
 
-input[type=text]{  
+input[type=text]{
     width: 60%;
     display:block;
     margin-bottom:6px;
+    border-radius: 3px;
+}
+
+input[type=text]:focus {
+    border: 3px solid #98e698;
+}
+
+input[type=password]:focus {
+    border: 3px solid #98e698;
 }
 
 input[type=password]{
@@ -154,12 +164,28 @@ input[type=date]{
     margin-bottom:6px;
 }
 
+input[type=date]:focus{
+    border: 3px solid #98e698;
+}
+
+input[id=url]{
+    font-weight: none;
+    font-size: 10px;
+}
+
 textarea{
+    font-family: "Verdana",Times;
+    background-color: #cc9966;
     display:block;
-    background-color:#993300;
     border: 2px solid #3366ff;
-    color:white;
+    color:black;
+    font-size: 14px;
+    font-weight: bold;
     margin-bottom:6px;
+}
+
+textarea:focus{
+    border: 3px solid #98e698;
 }
 
 #iscriviti{
@@ -169,7 +195,7 @@ textarea{
     padding: 5%;
     margin-left:10px;
     margin-bottom: 10px;
-    width: 40%;
+    width: 39%;
     font-weight:bold;
 }
 #scritta{
@@ -213,7 +239,7 @@ label{
 }
 
 .active{
-    border-color: #ff6666;
+    border-color: #99bbff;
     border-style:solid;
     border-radius: 25px;
     background-color:#ffffcc;
@@ -221,7 +247,7 @@ label{
 }
 
 .other{
-    border-color: #ff6666;
+    border-color: #99bbff;
     border-style: solid;
     border-radius: 25px;
 }
@@ -343,7 +369,7 @@ label{
 /*Immagine informativa posta in corrispondenza di 
     ogni utente registrato,ha il compito di colpire l'attenzione dell'utente
         poichè esso individui i profili degli utenti già scritti.*/
-#picutente{
+.picutente{
     background-image: url(img/anagrafica.png);
     background-repeat: no-repeat;
 }
