@@ -16,6 +16,7 @@ body{
 }
 
 #utenti{
+    border-radius: 5px;
     background-color: white;
     border-style:solid;
     width:205px;
@@ -41,7 +42,7 @@ header{
     font-weight: bold;
     border-style: solid;
     margin-bottom: 10px;
-    height:70px;
+    height:60px;
     text-align: center;
 }
 
@@ -169,7 +170,6 @@ input[type=date]:focus{
 }
 
 input[id=url]{
-    font-weight: none;
     font-size: 10px;
 }
 
@@ -211,13 +211,14 @@ textarea:focus{
 }
 
 #divSom{
+    float:left;
+    border-radius: 5px;
     background-color: white;
     margin-top: 10px;
     padding-right:10px;
     border-style: solid;
     width: 160px;
     padding-left:10px;
-    float:left;
 }
 
 #focus{
@@ -344,7 +345,16 @@ label{
 
 @media screen and (min-width: 1024px){
     
-     #divPost{
+    header{
+        width:163px;
+        float:left;
+    }
+    
+    nav{
+        height:60px;
+    }
+    
+    #divPost{
         width: 60%;
         float: left;
         margin-left: 10px;
@@ -364,6 +374,9 @@ label{
         background-repeat: no-repeat;
     }
     
+    #divSom{
+        margin-left:-165px;
+    }
 }
 
 /*Immagine informativa posta in corrispondenza di 
