@@ -149,6 +149,7 @@ input[type=text]{
     display:block;
     margin-bottom:6px;
     border-radius: 3px;
+    border-width: 2px;
 }
 
 input[type=text]:focus {
@@ -163,10 +164,14 @@ input[type=password]{
     width: 60%;
     display:block;
     margin-bottom:6px;
+    border-radius: 3px;
+    border-width: 2px;
 }
 
 input[type=date]{
+    border-width: 2px;
     display:block;
+    border-radius: 3px;
     width:29%;
     margin-bottom:6px;
 }
@@ -188,6 +193,7 @@ textarea{
     font-size: 14px;
     font-weight: bold;
     margin-bottom:6px;
+    border-width: 2px;
 }
 
 textarea:focus{
