@@ -12,6 +12,10 @@
         <servlet-name>Bacheca</servlet-name>
         <url-pattern>/Bacheca</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Descrizione</servlet-name>
+        <url-pattern>/Descrizione</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
