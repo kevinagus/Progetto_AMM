@@ -13,14 +13,22 @@ public class Utente {
     
     private int id;
     private String nome;
-    private String password;
+    private String cognome;
     private String urlFotoProfilo;
+    private String frase;
+    private String password;
+    private String dataDiNascita;
+    
+    
     
     public Utente(){
         id=0;
         nome="";
-        password="";
+        cognome="";
         urlFotoProfilo="";
+        frase="";
+        password="";
+        dataDiNascita="";
     }
     
     /**
@@ -49,6 +57,22 @@ public class Utente {
      */
     public void setNome(String nome) {
         this.nome = nome;
+    }
+    
+    public String getCognome() {
+        return cognome;
+    }
+    
+    public String setCognome(String cognome) {
+        return this.cognome=cognome;
+    }
+    
+    public void setFrase(String frase) {
+        this.frase = frase;
+    }
+    
+    public String getFrase() {
+        return frase;
     }
     
     /**

@@ -18,10 +18,10 @@
     </head>
     <body>
         
-        <c:set var="titolo" value="Profilo" scope="request"/>
+        <c:set var="titolo" value="Login" scope="request"/>
         <jsp:include page="header.jsp"/>
         
-        <c:set var="page" value="profilo" scope="request"/>
+        <c:set var="page" value="login" scope="request"/>
         <jsp:include page="nav.jsp"/>
         
         <div id="divAccesso">

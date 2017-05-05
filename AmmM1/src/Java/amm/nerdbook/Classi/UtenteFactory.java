@@ -30,11 +30,11 @@ public class UtenteFactory {
         user1.setId(1);
         user1.setNome("Lorenzo");
         user1.setPassword("ciao");
-        user1.setUrlFotoProfilo("img/vettel.jpg");
+        user1.setUrlFotoProfilo("");
 
         Utente user2 = new Utente();
         user2.setId(2);
-        user2.setNome("Giovanni");
+        user2.setNome("AMMMMMMMM");
         user2.setPassword("ehitu");
         user2.setUrlFotoProfilo("img/maioli.jpg");
 
@@ -57,5 +57,14 @@ public class UtenteFactory {
             }
         }
         return null;
+    }
+    
+    public int getIdByUserAndPassword(String user, String password) {
+        for (Utente copiaUtente : this.listaUtenti) {
+            if (copiaUtente.getNome().equals(user) && copiaUtente.getPassword().equals(password)) {
+                return copiaUtente.getId();
+            }
+        }
+        return -1;
     }
 }
