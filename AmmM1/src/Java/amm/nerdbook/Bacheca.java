@@ -9,6 +9,7 @@ import amm.nerdbook.Classi.Utente;
 import amm.nerdbook.Classi.UtenteFactory;
 import amm.nerdbook.Classi.Post;
 import amm.nerdbook.Classi.PostFactory;
+import java.util.ArrayList;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -46,11 +47,10 @@ public class Bacheca extends HttpServlet {
         {
             //l’utente è autenticato..
             //controllo se è impostato il parametro get "user" che mi consente
-            //di visualizzare una bacheca di uno specifico utente.
-            String user;
-            user = request.getParameter("user");
+            //di visualizzare la bacheca di uno specifico utente.
+            String user = request.getParameter("utente");
             
-            int userID;
+            int userID = -1;
 
             if (user != null) {
                 userID = Integer.parseInt(user);
@@ -60,8 +60,11 @@ public class Bacheca extends HttpServlet {
             }
 
             Utente utente = UtenteFactory.getInstance().getUtenteById(userID);
+            ArrayList<Utente> listaUtenti = UtenteFactory.getInstance().getListaUtenti();
+            
             if (utente != null) {
                 request.setAttribute("utente", utente);
+                request.setAttribute("users",listaUtenti);
 
                 List<Post> posts = PostFactory.getInstance().getPostList(utente);
                 request.setAttribute("posts", posts);

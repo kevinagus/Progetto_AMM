@@ -35,11 +35,11 @@
                     Utente non autenticato. Accesso negato.
                 </div>
             </c:if>
-            <c:if test="${notAutenticate!=true}">
+            <c:if test="${notAutenticate!=true and visualizeData!=true}">
                 <form action="Profilo" method="post">
                     <div id="divNome">
-                        <label for="nome">Nome</label>
-                        <input type="text" name="nome" id="nome"/>
+                        <label for="user">Nome</label>
+                        <input type="text" name="user" id="nome"/>
                     </div>
                     <div id="divCognome">
                         <label for="cognome">Cognome</label>
@@ -58,8 +58,8 @@
                         <input type="date" name="data" id="data"/>
                     </div>
                     <div id="divPswd">
-                        <label for="pswd">Password</label>
-                        <input type="password" name="pswd" id="pswd"/>
+                        <label for="pawd">Password</label>
+                        <input type="password" name="pawd" id="pswd"/>
                     </div>
                     <div id="divCpswd">
                         <label for="cpswd">Conferma password</label>
@@ -74,25 +74,20 @@
                 <div id="datiInseriti">
                     <div id="divNome">
                         <strong>Nome:</strong>
-                        ${nome}
+                        ${utente.nome}
                     </div>
                     <div id="divCognome">
                         <strong>Cognome:</strong>
-                        ${cognome}
+                        ${utente.cognome}
                     </div>
                     <div id="divFoto">
                         <strong>URL foto profilo:</strong>
-                        ${url}
+                        ${utente.urlFotoProfilo}
                     </div>
                     <div id="divFrase">
                         <strong>Frase di presentazione:</strong>
-                        ${frase}
+                        ${utente.frase}
                     </div>
-                    <div id="divData">
-                        <strong>Data di nascita:</strong>
-                        ${data}
-                    </div>
-                </form>
             </c:if> 
         </div>
     </body>

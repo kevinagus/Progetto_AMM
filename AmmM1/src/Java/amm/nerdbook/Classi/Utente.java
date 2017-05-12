@@ -46,33 +46,45 @@ public class Utente {
     }
 
     /**
-     * @return the nome
+     * @return the name
      */
     public String getNome() {
         return nome;
     }
 
     /**
-     * @param nome the nome to set
+     * @param nome the name to set
      */
     public void setNome(String nome) {
         this.nome = nome;
     }
     
+    /**
+     * @return the surname
+     */
     public String getCognome() {
         return cognome;
     }
     
-    public String setCognome(String cognome) {
-        return this.cognome=cognome;
+    /**
+     * @param cognome the surname to set
+     */
+    public void setCognome(String cognome) {
+        this.cognome=cognome;
     }
     
-    public void setFrase(String frase) {
-        this.frase = frase;
-    }
-    
+    /**
+     * @return the phrase
+     */
     public String getFrase() {
         return frase;
+    }
+    
+    /**
+     * @param frase the phrase to set
+     */
+    public void setFrase(String frase) {
+        this.frase = frase;
     }
     
     /**
@@ -80,6 +92,20 @@ public class Utente {
      */
     public String getPassword() {
         return password;
+    }
+    
+    /**
+     * @return the urlFotoProfilo
+     */
+    public String getUrlFotoProfilo() {
+        return urlFotoProfilo;
+    }
+
+    /**
+     * @param urlFotoProfilo the urlFotoProfilo to set
+     */
+    public void setUrlFotoProfilo(String urlFotoProfilo) {
+        this.urlFotoProfilo = urlFotoProfilo;
     }
 
     /**
@@ -96,18 +122,5 @@ public class Utente {
         return false;
     }
 
-    /**
-     * @return the urlFotoProfilo
-     */
-    public String getUrlFotoProfilo() {
-        return urlFotoProfilo;
-    }
-
-    /**
-     * @param urlFotoProfilo the urlFotoProfilo to set
-     */
-    public void setUrlFotoProfilo(String urlFotoProfilo) {
-        this.urlFotoProfilo = urlFotoProfilo;
-    }
     
 }

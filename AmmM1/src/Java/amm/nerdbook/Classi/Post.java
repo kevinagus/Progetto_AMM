@@ -78,7 +78,7 @@ public class Post {
     }
 
     /**
-     * @param content the content to set
+     * @param img the content to set
      */
     public void setImage(String img) {
         this.img = img;

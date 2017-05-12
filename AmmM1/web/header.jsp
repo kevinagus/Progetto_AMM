@@ -8,7 +8,7 @@
 
 <header>
     <div id="titolo">
-        <h1>${titolo}</h1>
+        <h1>${titolo}</h1>      
     </div>
 </header>
 

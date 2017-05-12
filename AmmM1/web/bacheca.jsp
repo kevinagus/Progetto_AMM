@@ -24,24 +24,35 @@
         <c:set var="page" value="bacheca" scope="request"/>
         <jsp:include page="nav.jsp"/>
         
+        
         <jsp:include page="utenti.jsp"/>
         
-        <div id="divPost">
-            <c:forEach var="user" items="${users}">
-                <h3>${user.nome}</h3>
-                <a id="${user.id}">
+        <c:if test="${notAutenticate==true}">
+            <div id="UserNonAutenticato">
+                Utente non autenticato. Accesso negato.
+            </div>
+        </c:if>
+        <c:if test="${notAutenticate!=true}">
+            <jsp:include page="nuovopost.jsp"/>
+            <div id="divPost">
+                <c:set var="user" value="${utente}" scope="request"/>  
+                <h3>${user.nome} ${user.cognome}</h3>
+                
+                <c:forEach var="post" items="${posts}">
                     <div id="divPost1">
                         <c:if test="${post.postType == 'TEXT'}">
                             <p>${post.content}</p>
                         </c:if>
                         <c:if test="${post.postType == 'LINK'}">
-                            <p>${post.content}</p>
+                            <a href="${post.content}">Link</a>
                         </c:if>
                         <c:if test="${post.postType == 'IMAGE'}">
-                            <img alt="Foto del post" src="${post.img}"> 
+                            <img class="ProfPic" alt="Foto del post" src="${post.content}"> 
                         </c:if>
-                    </div>  
-            </c:forEach>           
-        </div>
+                    </div>
+                </c:forEach> 
+            </div>
+        </c:if>
+
     </body>
 </html>

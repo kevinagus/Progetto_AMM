@@ -10,7 +10,7 @@
     <h2>Utenti</h2>
     <ul>
         <c:forEach var="utente" items="${users}">
-            <li><a href="bacheca.html#${utente.id}" class="picutente">${utente.nome}</a></li>
+            <li><a href="Bacheca?utente=${utente.id}" class="picutente">${utente.nome} ${utente.cognome}</a></li>
         </c:forEach>
     </ul>
 </div>

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * 
+ *
  *
  * @author Kevin
  */
@@ -32,11 +32,11 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = request.getSession();
-        
+
         //l'utente non è autenticato quindi mostro il form di login
         if (request.getParameter("logout") != null) {
             session.invalidate();
@@ -47,25 +47,25 @@ public class Login extends HttpServlet {
         if (session.getAttribute("loggedIn") != null
                 && session.getAttribute("loggedIn").equals(true)) {
             //l'utente è loggato, effettuo un controllo sui dati immessi
-            
+
             String username = request.getParameter("user");
             String password = request.getParameter("pasw");
-            
-            int userId= UtenteFactory.getInstance().getIdByUserAndPassword(username,password);
-            
-            Utente user= UtenteFactory.getInstance().getUtenteById(userId);
-            
-            if ( user.getNome().equals("") || user.getCognome().equals("") || user.getUrlFotoProfilo().equals("") || user.getFrase().equals(""))
-            {
+
+            int userId = UtenteFactory.getInstance().getIdByUserAndPassword(username, password);
+
+            Utente user = UtenteFactory.getInstance().getUtenteById(userId);
+
+            if (user.getNome().equals("") || user.getCognome().equals("") || user.getUrlFotoProfilo().equals("") || user.getFrase().equals("")) {
+                //invece se qualche dato è settato a null visualizzo la pagina di 
+                //modifica dei dati del profilo
+                request.getRequestDispatcher("profilo.jsp").forward(request, response);
+                return;
+            } else {
+
                 //se  l’utente ha registrato nome, cognome, immagine del profilo e 
                 //frase di presentazione in modo corretto viene visualizzata la bacheca
                 //con i post dell'utente
                 request.getRequestDispatcher("Bacheca").forward(request, response);
-                return;
-            } else {
-                //invece se qualche dato è settato a null visualizzo la pagina di 
-                //modifica dei dati del profilo
-                request.getRequestDispatcher("profilo.jsp").forward(request, response);
                 return;
             }
 
@@ -76,27 +76,45 @@ public class Login extends HttpServlet {
 
             int logUserID = -1;
 
-            if (username != null && password != null) {
+            if (username != null && password != null) 
+            {
                 logUserID = UtenteFactory.getInstance().getIdByUserAndPassword(username, password);
-            }
 
-            if (logUserID != -1) {
-                //username e password corrispondono ad un determinato utente 
-                //presente nella Factory 
-                session.setAttribute("loggedIn", true);
-                session.setAttribute("loggedUserID", logUserID);
+                if (logUserID != -1) {
+                    //username e password corrispondono ad un determinato utente 
+                    //presente nella Factory 
+                    session.setAttribute("loggedIn", true);
+                    session.setAttribute("loggedUserID", logUserID);
 
-                request.getRequestDispatcher("Bacheca").forward(request, response);
-                return;
-            } else {
-                //l’utente ha inviato username e password errati
-                request.setAttribute("datiNonValidi", true);
-                request.getRequestDispatcher("login.jsp").forward(request, response);
-                return;
+                    Utente user = UtenteFactory.getInstance().getUtenteById(logUserID);
+
+                    if (user.getNome().equals("") || user.getCognome().equals("") || user.getUrlFotoProfilo().equals("") || user.getFrase().equals("")) {
+                        //se qualche dato è settato a null visualizzo la pagina di 
+                        //modifica dei dati del profilo
+                        request.getRequestDispatcher("profilo.jsp").forward(request, response);
+                        return;
+                    } else {
+
+                        //se  l’utente ha registrato nome, cognome, immagine del profilo e 
+                        //frase di presentazione in modo corretto viene visualizzata la bacheca
+                        //con i post dell'utente
+                        request.getRequestDispatcher("Bacheca").forward(request, response);
+                        return;
+                    }
+                } else {
+                    //l’utente ha inviato username e password errati
+                    request.setAttribute("datiNonValidi", true);
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                    return;
+                }
             }
         }
-        
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+        /*
+            Se non si verifica nessuno degli altri casi, 
+            tentativo di accesso diretto alla servlet Login -> reindirizzo verso 
+            il form di login.
+         */
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

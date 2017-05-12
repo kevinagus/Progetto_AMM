@@ -18,7 +18,7 @@
         </li>
         <li <c:if test="${page=='login'}">class="active"</c:if>
             <c:if test="${page!='login'}">class="other"</c:if> >
-            <a href="Login?logout=1">Login</a>
+            <a href="Login">Login</a>
         </li>
         <li <c:if test="${page=='profilo'}">class="active"</c:if>
             <c:if test="${page!='profilo'}">class="other"</c:if> >

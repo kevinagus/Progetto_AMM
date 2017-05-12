@@ -5,6 +5,8 @@
  */
 package amm.nerdbook;
 
+import amm.nerdbook.Classi.Utente;
+import amm.nerdbook.Classi.UtenteFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -39,15 +41,32 @@ public class Profilo extends HttpServlet {
         if(session.getAttribute("loggedIn") != null &&
            session.getAttribute("loggedIn").equals(true))
         {
+            String username =request.getParameter("user");
+            String password =request.getParameter("pawd");
+            String cognome =request.getParameter("cognome");
+            String url =request.getParameter("url");
+            String frase =request.getParameter("frase");
+            
+            int userId = UtenteFactory.getInstance().getIdByUserAndPassword(username, password);
+            Utente user = UtenteFactory.getInstance().getUtenteById(userId);
+            
+            user.setCognome(cognome);
+            user.setUrlFotoProfilo(url);
+            user.setFrase(frase);
+            
             //l'utente è autenticato ed ha inserito i dati del suo profilo,quindi li visualizzo 
-            if(session.getAttribute("nome")!=null)
+            if(user.getNome().equals("") || user.getCognome().equals("") || 
+                user.getUrlFotoProfilo().equals("") || user.getFrase().equals("") ) 
             {
+                //l'utente ha scordato di inserire qualche dato, mostra il form per l'inserimento dei dati del profilo
+                request.getRequestDispatcher("profilo.jsp").forward(request, response);
+                return;
+            } else {
+                //l’utente è autenticato, mostra i dati inseriti dopo l'aggiornamento
                 session.setAttribute("visualizeData", true);
-                request.getRequestDispatcher("profilo.jsp").forward(request,response);
-            }
-            else{
-                //l’utente è autenticato, mostra il form per l'inserimento dei dati del profilo
-                request.getRequestDispatcher("profilo.jsp").forward(request,response);
+                request.setAttribute("utente", user);
+                request.getRequestDispatcher("profilo.jsp").forward(request, response);
+                return;
             }
             
         }
