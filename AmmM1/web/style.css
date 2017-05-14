@@ -115,6 +115,15 @@ p{
     color: #006600;
 }
 
+#logout{
+    background-color: white;
+    border-style:solid;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
 .button{
     background-color:#006600;
     color:white;
@@ -139,10 +148,6 @@ nav li{
     padding-right: 20px;
 }
 
-.users{
-    list-style-type: none;
-}
-
 ul{
     margin-top:10px;
     margin-bottom:10px;
@@ -154,6 +159,11 @@ input[type=text]{
     margin-bottom:6px;
     border-radius: 3px;
     border-width: 2px;
+}
+
+input[type=file]{
+    width: 107px;
+    height: auto;
 }
 
 input[type=text]:focus {
@@ -204,7 +214,7 @@ textarea:focus{
     border: 3px solid #98e698;
 }
 
-#iscriviti, #newPost{
+#iscriviti{
     background-color: white;
     border-radius: 5px;
     float:left;
@@ -219,6 +229,26 @@ textarea:focus{
     text-align: center;
 }
 
+#newPost{
+    background-color: white;
+    border-radius: 5px;
+    float:left;
+    border-style: solid;
+    padding: 2%;
+    margin-left:10px;
+    margin-top:10px;
+    margin-bottom: 10px;
+    width: 51%;
+    font-weight:bold;
+}
+
+.campiDati{
+    margin-bottom: 25px;
+}
+
+#link{
+    margin-bottom: 30px;
+}
 
 #divPost1,#divPost2,#divPost3{
     border-radius: 5px;
@@ -422,10 +452,6 @@ label{
     
     #divSom{
         margin-left:-226px;
-    }
-    
-    #utenti{
-        margin-left: -226px;
     }
 }
 

@@ -6,11 +6,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<div class="pannello" id="utenti">
+<div id="utenti">
     <h2>Utenti</h2>
     <ul>
-        <c:forEach var="utente" items="${users}">
-            <li><a href="Bacheca?utente=${utente.id}" class="picutente">${utente.nome} ${utente.cognome}</a></li>
+        <c:forEach var="user" items="${users}">
+            <li><a href="Bacheca?utente=${user.id}" class="picutente">${user.nome} ${user.cognome}</a></li>
         </c:forEach>
     </ul>
 </div>

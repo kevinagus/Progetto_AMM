@@ -46,11 +46,20 @@ public class Login extends HttpServlet {
 
         if (session.getAttribute("loggedIn") != null
                 && session.getAttribute("loggedIn").equals(true)) {
+            
+            //in questo punto un utente loggato puo tentare di accedere nuovamente alla pagina login
+
             //l'utente è loggato, effettuo un controllo sui dati immessi
 
             String username = request.getParameter("user");
             String password = request.getParameter("pasw");
-
+            
+            if(username==null)
+            {
+                request.getRequestDispatcher("Bacheca").forward(request, response);
+                return;
+            }
+            
             int userId = UtenteFactory.getInstance().getIdByUserAndPassword(username, password);
 
             Utente user = UtenteFactory.getInstance().getUtenteById(userId);

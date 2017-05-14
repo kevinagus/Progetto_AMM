@@ -9,6 +9,7 @@ import amm.nerdbook.Classi.Utente;
 import amm.nerdbook.Classi.UtenteFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,9 +39,14 @@ public class Profilo extends HttpServlet {
         //non viene creata una nuova e dentro session non vi è niente
         HttpSession session = request.getSession(false);
         
+        ArrayList<Utente> listaUtenti = UtenteFactory.getInstance().getListaUtenti();
+        request.setAttribute("users",listaUtenti); 
+        
         if(session.getAttribute("loggedIn") != null &&
            session.getAttribute("loggedIn").equals(true))
-        {
+        {         
+            request.getRequestDispatcher("profilo.jsp").forward(request, response);
+            
             String username =request.getParameter("user");
             String password =request.getParameter("pawd");
             String cognome =request.getParameter("cognome");

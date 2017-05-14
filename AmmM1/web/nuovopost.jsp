@@ -8,46 +8,76 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div id="newPost">
-    <form action="Bacheca" method="post">
-        <div id="divPost">
-            <div>
-                <label for="textType">Scelta bacheca utente per pubblicare il post:</label>
-                <ul>
-                    <c:forEach var="utente" items="${users}">
-                        <li class="users">
-                            <label for="choosebacheca">${utente.nome} ${utente.cognome}</label>
-                            <input type="radio" name="choosebacheca">
-                        </li>
-                    </c:forEach>
-                </ul>
-            </div>
-            <div class="postType">
-                <label for="textType">Post di Testo</label>
-                <input type="radio" name="postType" value="textType" id="textType">
-            </div>
-            <div class="postType">
-                <label for="imgType">Post con Foto</label>
-                <input type="radio" name="postType" value="imgType" id="imgType">
-            </div>
-            <div class="postType">
-                <label for="linkType">Post con Link</label>
-                <input type="radio" name="postType" value="linkType" id="linkType">
-            </div>
-            <div id="postContent">
+    
+    <c:set var="user" value="${utente}" scope="request"/> 
+    <c:set var="userLogged" value="${userLoggato}" scope="request"/>
+    
+    <c:if test="${conferma==true}">
+        <p>Hai scritto sulla bacheca di ${utente.nome} ${utente.cognome}</p>
+    </c:if>
+    
+    <c:if test="${nuovoPost==false and conferma!=true}">
+        <form action="Bacheca?utente=${user.id}" method="post">
+            
+            <div id="divPost">
                 <div>
-                    <label for="textPost">Testo</label>
-                    <textarea name="textPost" id="textPost"></textarea>
+                    <h2>Nuovo Post</h2>
                 </div>
-                <div>
-                    <label for="imgPost">URL immagine</label>
-                    <input type="file" name="imgPost" id="imgPost">
+                <div class="postType">
+                    <label for="postType">Post di Testo</label>
+                    <input type="radio" name="postType" value="text" id="textType">
                 </div>
-                <div>
-                    <label for="linkPost">URL link</label>
-                    <input type="text" name="linkPost" id="linkPost">
+                <div class="postType">
+                    <label for="postType">Post con Foto</label>
+                    <input type="radio" name="postType" value="img" id="imgType">
+                </div>
+                <div id="link" class="postType">
+                    <label for="postType">Post con Link</label>
+                    <input type="radio" name="postType" value="link" id="linkType">
+                </div>
+                <div id="postContent">
+                    <div class="campiDati">
+                        <label for="textPost">Testo:</label>
+                        <textarea name="textPost" id="textPost"></textarea>
+                    </div>
+                    <div class="campiDati">
+                        <label for="imgPost">URL immagine:</label>
+                        <input type="file" name="imgPost" id="imgPost">
+                    </div>
+                    <div class="campiDati">
+                        <label for="linkPost">URL link:</label>
+                        <input type="text" name="linkPost" id="linkPost">
+                    </div>
+                    <button class="button" type="submit">Invia</button>
                 </div>
             </div>
-            <button type="submit">Invia</button>
-        </div>
-    </form>
+        </form>
+    </c:if>
+    
+    <c:if test="${nuovoPost==true and conferma!=true}">
+        <form action="Bacheca?utente=${user.id}&nuovopost=1" method="post">
+            <div id="divPost">
+                    <div>
+                        <h2>Riepilogo nuovo post</h2>
+                    </div>
+
+                    <div id="postContent">    
+                        <p>Autore post: ${userLogged.nome} ${userLogged.cognome}</p>    
+                        <p>Proprietario bacheca: ${user.nome} ${user.cognome}</p>
+
+                        <c:set var="post" value="${newPost}" scope="request"/>
+                        <c:if test="${Testo==true}">
+                            <p>Testo: ${post.content}</p>
+                        </c:if>
+                        <c:if test="${Immagine==true}">
+                            <p>Immagine:</p>                       
+                        </c:if>
+                        <c:if test="${Link==true}">
+                            <p>Link: ${post.content}</p>
+                        </c:if>            
+                    </div>
+                    <button class="button" type="submit">Conferma Post</button>
+            </div>
+        </form>
+    </c:if>
 </div>

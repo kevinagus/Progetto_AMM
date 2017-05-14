@@ -11,7 +11,6 @@ import amm.nerdbook.Classi.Post;
 import amm.nerdbook.Classi.PostFactory;
 import java.util.ArrayList;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -45,30 +44,76 @@ public class Bacheca extends HttpServlet {
         if(session != null && session.getAttribute("loggedIn") != null &&
            session.getAttribute("loggedIn").equals(true))
         {
+            int userID = -1;
+            //attraverso l'id dell'utente attualmente loggato recupero le sue info
+            //e setto l'attributo 'userLoggato'
+            Integer loggedUserID = (Integer) session.getAttribute("loggedUserID");
+            userID = loggedUserID;
+            Utente userLoggato=UtenteFactory.getInstance().getUtenteById(userID);
+            request.setAttribute("userLoggato", userLoggato);
+            
             //l’utente è autenticato..
             //controllo se è impostato il parametro get "user" che mi consente
             //di visualizzare la bacheca di uno specifico utente.
             String user = request.getParameter("utente");
-            
-            int userID = -1;
 
             if (user != null) {
                 userID = Integer.parseInt(user);
-            } else {
-                Integer loggedUserID = (Integer) session.getAttribute("loggedUserID");
-                userID = loggedUserID;
             }
-
+            
             Utente utente = UtenteFactory.getInstance().getUtenteById(userID);
             ArrayList<Utente> listaUtenti = UtenteFactory.getInstance().getListaUtenti();
             
             if (utente != null) {
+                
                 request.setAttribute("utente", utente);
                 request.setAttribute("users",listaUtenti);
 
                 List<Post> posts = PostFactory.getInstance().getPostList(utente);
                 request.setAttribute("posts", posts);
-
+                
+                String nPost = request.getParameter("nuovopost");
+                if(nPost!=null){
+                    int checkPost = Integer.parseInt(nPost);                 
+                    if (checkPost == 1) {
+                        request.setAttribute("conferma", true);
+                    }
+                }
+                
+                
+                String postType=request.getParameter("postType");
+                if(postType!=null)
+                {
+                    Post newPost=new Post();
+                    newPost.setUser(utente);
+                    request.setAttribute("nuovoPost",true);
+                    request.setAttribute("newPost",newPost);
+                    
+                    if(postType.equals("text"))
+                    {
+                        newPost.setPostType(Post.Type.TEXT);
+                        String testo=request.getParameter("textPost");
+                        newPost.setContent(testo);
+                        request.setAttribute("Testo",true);
+                    }
+                    if(postType.equals("img"))
+                    {
+                        newPost.setPostType(Post.Type.IMAGE);
+                        request.setAttribute("Immagine",true);
+                    }
+                    if(postType.equals("link"))
+                    {
+                        newPost.setPostType(Post.Type.LINK);
+                        String testo=request.getParameter("linkPost");
+                        newPost.setContent(testo);
+                        request.setAttribute("Link",true);
+                    }
+                    
+                }
+                else{
+                    request.setAttribute("nuovoPost",false);
+                }
+                                   
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);
             } else {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);

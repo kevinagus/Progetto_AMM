@@ -23,7 +23,12 @@
         
         <c:set var="page" value="bacheca" scope="request"/>
         <jsp:include page="nav.jsp"/>
-        
+             
+        <c:if test="${not empty userLoggato }">
+            <div id="logout">
+                <p><a href="Login?logout=1">Logout</a></p>
+            </div>
+        </c:if>
         
         <jsp:include page="utenti.jsp"/>
         

@@ -24,6 +24,12 @@
         <c:set var="page" value="profilo" scope="request"/>
         <jsp:include page="nav.jsp"/>
         
+        <c:if test="${not empty loggedUserID }">
+            <div id="logout">
+                <p><a href="Login?logout=1">Logout</a></p>
+            </div>
+        </c:if>
+        
         <jsp:include page="utenti.jsp"/>
         
         <div id="scritta">
