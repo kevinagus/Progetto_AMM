@@ -44,18 +44,23 @@ public class Profilo extends HttpServlet {
         
         if(session.getAttribute("loggedIn") != null &&
            session.getAttribute("loggedIn").equals(true))
-        {         
-            request.getRequestDispatcher("profilo.jsp").forward(request, response);
-            
+        {                     
             String username =request.getParameter("user");
             String password =request.getParameter("pawd");
             String cognome =request.getParameter("cognome");
             String url =request.getParameter("url");
             String frase =request.getParameter("frase");
             
+            if(username==null && password==null)
+            {
+                request.getRequestDispatcher("profilo.jsp").forward(request, response);
+                return;
+            }
+            
             int userId = UtenteFactory.getInstance().getIdByUserAndPassword(username, password);
             Utente user = UtenteFactory.getInstance().getUtenteById(userId);
             
+            user.setNome(username);
             user.setCognome(cognome);
             user.setUrlFotoProfilo(url);
             user.setFrase(frase);

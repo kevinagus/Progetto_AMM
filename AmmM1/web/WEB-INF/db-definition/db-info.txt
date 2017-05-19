@@ -1,0 +1,37 @@
+--Database--
+Name: ammdb
+Username: nerd
+Password: nerd
+
+
+Task 1
+
+Entità: UTENTE
+Attributi:
+•	Id , tipo intero; (chiave primaria)
+•	Nome, tipo stringa;
+•	Cognome, tipo stringa;
+•	Url foto profilo, tipo stringa;
+•	Frase, tipo stringa;
+•	Password, tipo stringa;
+•	Data di nascita, tipo stringa;
+
+Entità: POST
+Attributi:
+•	Id, tipo intero; (chiave primaria)
+•	User, tipo Utente; 
+•	Contenuto, tipo stringa;
+•	Immagine, tipo stringa;
+•	Tipo post, tipo stringa;
+
+Entità: POSTTYPE
+Attributi:
+•	Id,tipo intero;(chiave primaria)
+•	Nome,tipo stringa;--> indica il tipo di post
+
+
+Relazioni:
+1.	Attributo User tabella Post collegato attraverso l’attributo id con un utente nella tabella Utente, relazione molti ad uno poiché un utente può pubblicare diversi post.
+POST.user-->UTENTE.id
+2.	Attributo Tipo tabella Post collegato attraverso l’attributo id ad un tipo di post nella tabella Posttype: anche in questo caso la relazione è da molti a uno, poiché diversi post possono essere di uno stesso tipo ad esempio di tipo testo o link.  
+POST.tipo-->POSTTYPE.id

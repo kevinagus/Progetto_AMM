@@ -28,19 +28,42 @@
             <div id="logout">
                 <p><a href="Login?logout=1">Logout</a></p>
             </div>
-        </c:if>
-        
-        <jsp:include page="utenti.jsp"/>
+            
+            <jsp:include page="utenti.jsp"/>
+        </c:if>   
         
         <div id="scritta">
             <h2>Iscriviti per vedere i post dei tuoi amici</h2>
         </div>
         <div id="iscriviti">
+            
+            <c:if test="${visualizeData==true}">
+                <div id="datiInseriti">
+                    <h2>Riepilogo dati inseriti</h2>
+                    <div id="divNome">
+                        <strong>Nome:</strong>
+                        ${utente.nome}
+                    </div>
+                    <div id="divCognome">
+                        <strong>Cognome:</strong>
+                        ${utente.cognome}
+                    </div>
+                    <div id="divFoto">
+                        <strong>URL foto profilo:</strong>
+                        ${utente.urlFotoProfilo}
+                    </div>
+                    <div id="divFrase">
+                        <strong>Frase di presentazione:</strong>
+                        ${utente.frase}
+                    </div>
+            </c:if> 
+            
             <c:if test="${notAutenticate==true}">
                 <div id="UserNonAutenticato">
                     Utente non autenticato. Accesso negato.
                 </div>
             </c:if>
+            
             <c:if test="${notAutenticate!=true and visualizeData!=true}">
                 <form action="Profilo" method="post">
                     <div id="divNome">
@@ -76,25 +99,6 @@
                     </div>
                 </form>
             </c:if>  
-            <c:if test="${visualizeData==true}">
-                <div id="datiInseriti">
-                    <div id="divNome">
-                        <strong>Nome:</strong>
-                        ${utente.nome}
-                    </div>
-                    <div id="divCognome">
-                        <strong>Cognome:</strong>
-                        ${utente.cognome}
-                    </div>
-                    <div id="divFoto">
-                        <strong>URL foto profilo:</strong>
-                        ${utente.urlFotoProfilo}
-                    </div>
-                    <div id="divFrase">
-                        <strong>Frase di presentazione:</strong>
-                        ${utente.frase}
-                    </div>
-            </c:if> 
         </div>
     </body>
 </html>

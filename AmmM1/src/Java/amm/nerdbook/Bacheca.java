@@ -36,22 +36,21 @@ public class Bacheca extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-         //ricerco una sessione pre esistente, se questa non esite 
+
+        //ricerco una sessione pre esistente, se questa non esite 
         //non viene creata una nuova e dentro session non vi è niente
         HttpSession session = request.getSession(false);
-        
-        if(session != null && session.getAttribute("loggedIn") != null &&
-           session.getAttribute("loggedIn").equals(true))
-        {
+
+        if (session != null && session.getAttribute("loggedIn") != null
+                && session.getAttribute("loggedIn").equals(true)) {
             int userID = -1;
             //attraverso l'id dell'utente attualmente loggato recupero le sue info
             //e setto l'attributo 'userLoggato'
             Integer loggedUserID = (Integer) session.getAttribute("loggedUserID");
             userID = loggedUserID;
-            Utente userLoggato=UtenteFactory.getInstance().getUtenteById(userID);
+            Utente userLoggato = UtenteFactory.getInstance().getUtenteById(userID);
             request.setAttribute("userLoggato", userLoggato);
-            
+
             //l’utente è autenticato..
             //controllo se è impostato il parametro get "user" che mi consente
             //di visualizzare la bacheca di uno specifico utente.
@@ -60,67 +59,67 @@ public class Bacheca extends HttpServlet {
             if (user != null) {
                 userID = Integer.parseInt(user);
             }
-            
+
             Utente utente = UtenteFactory.getInstance().getUtenteById(userID);
             ArrayList<Utente> listaUtenti = UtenteFactory.getInstance().getListaUtenti();
-            
+
             if (utente != null) {
-                
+
                 request.setAttribute("utente", utente);
-                request.setAttribute("users",listaUtenti);
+                request.setAttribute("users", listaUtenti);
 
                 List<Post> posts = PostFactory.getInstance().getPostList(utente);
                 request.setAttribute("posts", posts);
                 
+                //controllo la presenza di un nuovo post che andrà quindi
+                //confermato dall'utente prima di salvarlo nel DB
                 String nPost = request.getParameter("nuovopost");
-                if(nPost!=null){
-                    int checkPost = Integer.parseInt(nPost);                 
+                if (nPost != null) {
+                    //il nuovo post è stato confermato dall'utente
+                    int checkPost = Integer.parseInt(nPost);
                     if (checkPost == 1) {
                         request.setAttribute("conferma", true);
                     }
                 }
-                
-                
-                String postType=request.getParameter("postType");
-                if(postType!=null)
-                {
-                    Post newPost=new Post();
+
+                //controllo se l'utente ha specificato il tipo del nuovo post
+                String postType = request.getParameter("postType");
+                if (postType != null) {
+                    Post newPost = new Post();
+                    //imposto l'autore al nuovo post
                     newPost.setUser(utente);
-                    request.setAttribute("nuovoPost",true);
-                    request.setAttribute("newPost",newPost);
                     
-                    if(postType.equals("text"))
-                    {
+                    if (postType.equals("text")) {
                         newPost.setPostType(Post.Type.TEXT);
-                        String testo=request.getParameter("textPost");
-                        newPost.setContent(testo);
-                        request.setAttribute("Testo",true);
+                        newPost.setContent(request.getParameter("textPost"));
+                        request.setAttribute("Testo", true);
                     }
-                    if(postType.equals("img"))
-                    {
+                    else if (postType.equals("img")) {
                         newPost.setPostType(Post.Type.IMAGE);
-                        request.setAttribute("Immagine",true);
+                        newPost.setImage(request.getParameter("imgPost"));
+                        request.setAttribute("Immagine", true);
                     }
-                    if(postType.equals("link"))
-                    {
+                    else{
                         newPost.setPostType(Post.Type.LINK);
-                        String testo=request.getParameter("linkPost");
-                        newPost.setContent(testo);
-                        request.setAttribute("Link",true);
+                        newPost.setContent(request.getParameter("linkPost"));
+                        request.setAttribute("Link", true);
                     }
-                    
+                    //aggiungo il nuovo post al DB attraverso il metodo addNewPost
+                    PostFactory.getInstance().addNewPost(newPost);
+                    request.setAttribute("nuovoPost", true);
+                    request.setAttribute("newPost", newPost);
+                        
+                } 
+                else {
+                    //nel caso l'utente non abbia specificato il tipo di un nuovo post
+                    request.setAttribute("nuovoPost", false);
                 }
-                else{
-                    request.setAttribute("nuovoPost",false);
-                }
-                                   
+       
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);
             } else {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
-        }
-        else
-        {
+        } else {
             //l'utente non è autenticato quindi rimando a bacheca.jsp
             //dove mostro un messaggio di accesso negato
             request.setAttribute("notAutenticate",true);

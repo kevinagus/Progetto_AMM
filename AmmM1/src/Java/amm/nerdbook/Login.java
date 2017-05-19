@@ -5,10 +5,15 @@
  */
 package amm.nerdbook;
 
+import amm.nerdbook.Classi.PostFactory;
 import amm.nerdbook.Classi.UtenteFactory;
 import amm.nerdbook.Classi.Utente;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,8 +24,28 @@ import javax.servlet.http.HttpSession;
  *
  * @author Kevin
  */
+@WebServlet(loadOnStartup = 0)
 public class Login extends HttpServlet {
 
+    private static final String JDBC_DRIVER="org.apache.derby.jdbc.EmbeddedDriver";
+    private static final String DB_CLEAN_PATH="../../web/WEB-INF/db/ammdb";
+    private static final String DB_BUILD_PATH="WEB-INF/db/ammdb";
+    
+    @Override
+    public void init(){
+        String dbConnection = "jdbc:derby:" + this.getServletContext().getRealPath("/") + DB_BUILD_PATH;
+        try{
+            Class.forName(JDBC_DRIVER);
+        }
+        catch(ClassNotFoundException ex){
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE,null,ex);
+        }
+        
+        //IMPOSTO LA CONNECTION STRING PER OGNI FACTORY
+        UtenteFactory.getInstance().setConnectionString(dbConnection);
+        PostFactory.getInstance().setConnectionString(dbConnection);
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -54,15 +79,19 @@ public class Login extends HttpServlet {
             String username = request.getParameter("user");
             String password = request.getParameter("pasw");
             
+            //ricontrolla questo if
             if(username==null)
             {
-                request.getRequestDispatcher("Bacheca").forward(request, response);
+                request.getRequestDispatcher("Profilo").forward(request, response);
                 return;
             }
             
             int userId = UtenteFactory.getInstance().getIdByUserAndPassword(username, password);
 
             Utente user = UtenteFactory.getInstance().getUtenteById(userId);
+            
+            ArrayList<Utente> listaUtenti = UtenteFactory.getInstance().getListaUtenti();
+            request.setAttribute("users",listaUtenti); 
 
             if (user.getNome().equals("") || user.getCognome().equals("") || user.getUrlFotoProfilo().equals("") || user.getFrase().equals("")) {
                 //invece se qualche dato è settato a null visualizzo la pagina di 
@@ -96,6 +125,9 @@ public class Login extends HttpServlet {
                     session.setAttribute("loggedUserID", logUserID);
 
                     Utente user = UtenteFactory.getInstance().getUtenteById(logUserID);
+                    
+                    ArrayList<Utente> listaUtenti = UtenteFactory.getInstance().getListaUtenti();
+                    request.setAttribute("users",listaUtenti); 
 
                     if (user.getNome().equals("") || user.getCognome().equals("") || user.getUrlFotoProfilo().equals("") || user.getFrase().equals("")) {
                         //se qualche dato è settato a null visualizzo la pagina di 

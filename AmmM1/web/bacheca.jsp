@@ -28,23 +28,23 @@
             <div id="logout">
                 <p><a href="Login?logout=1">Logout</a></p>
             </div>
+            
+            <jsp:include page="utenti.jsp"/>
         </c:if>
         
-        <jsp:include page="utenti.jsp"/>
         
         <c:if test="${notAutenticate==true}">
-            <div id="UserNonAutenticato">
+            <div id="notAutenticate">
                 Utente non autenticato. Accesso negato.
             </div>
         </c:if>
         <c:if test="${notAutenticate!=true}">
             <jsp:include page="nuovopost.jsp"/>
-            <div id="divPost">
-                <c:set var="user" value="${utente}" scope="request"/>  
-                <h3>${user.nome} ${user.cognome}</h3>
-                
                 <c:forEach var="post" items="${posts}">
                     <div id="divPost1">
+                        <c:set var="user" value="${utente}" scope="request"/>  
+                        <h3>${user.nome} ${user.cognome}</h3>
+                
                         <c:if test="${post.postType == 'TEXT'}">
                             <p>${post.content}</p>
                         </c:if>
@@ -56,7 +56,6 @@
                         </c:if>
                     </div>
                 </c:forEach> 
-            </div>
         </c:if>
 
     </body>

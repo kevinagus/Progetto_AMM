@@ -42,7 +42,7 @@
                     </div>
                     <div class="campiDati">
                         <label for="imgPost">URL immagine:</label>
-                        <input type="file" name="imgPost" id="imgPost">
+                        <input type="text" name="imgPost" id="imgPost">
                     </div>
                     <div class="campiDati">
                         <label for="linkPost">URL link:</label>
@@ -70,7 +70,8 @@
                             <p>Testo: ${post.content}</p>
                         </c:if>
                         <c:if test="${Immagine==true}">
-                            <p>Immagine:</p>                       
+                            <p>Immagine:</p>
+                            <img class="ProfPic" alt="foto del post" src="${post.getImage()}">
                         </c:if>
                         <c:if test="${Link==true}">
                             <p>Link: ${post.content}</p>
