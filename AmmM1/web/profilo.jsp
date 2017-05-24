@@ -25,10 +25,6 @@
         <jsp:include page="nav.jsp"/>
         
         <c:if test="${not empty loggedUserID }">
-            <div id="logout">
-                <p><a href="Login?logout=1">Logout</a></p>
-            </div>
-            
             <jsp:include page="utenti.jsp"/>
         </c:if>   
         
@@ -96,6 +92,11 @@
                     </div>
                     <div id="divButton">
                         <button class="button" type="submit">Aggiorna</button>
+                    </div>
+                </form>
+                <form action="Profilo?delete=1" method="post">
+                    <div id="delButton">
+                        <button class="deletebutton" type="submit">Elimina profilo</button>
                     </div>
                 </form>
             </c:if>  

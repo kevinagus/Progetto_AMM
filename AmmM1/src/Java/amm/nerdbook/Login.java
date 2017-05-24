@@ -72,7 +72,6 @@ public class Login extends HttpServlet {
         if (session.getAttribute("loggedIn") != null
                 && session.getAttribute("loggedIn").equals(true)) {
             
-            //in questo punto un utente loggato puo tentare di accedere nuovamente alla pagina login
 
             //l'utente è loggato, effettuo un controllo sui dati immessi
 
@@ -125,6 +124,7 @@ public class Login extends HttpServlet {
                     session.setAttribute("loggedUserID", logUserID);
 
                     Utente user = UtenteFactory.getInstance().getUtenteById(logUserID);
+                    session.setAttribute("userLoggato", user);
                     
                     ArrayList<Utente> listaUtenti = UtenteFactory.getInstance().getListaUtenti();
                     request.setAttribute("users",listaUtenti); 

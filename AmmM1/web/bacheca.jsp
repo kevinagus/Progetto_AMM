@@ -25,13 +25,8 @@
         <jsp:include page="nav.jsp"/>
              
         <c:if test="${not empty userLoggato }">
-            <div id="logout">
-                <p><a href="Login?logout=1">Logout</a></p>
-            </div>
-            
             <jsp:include page="utenti.jsp"/>
         </c:if>
-        
         
         <c:if test="${notAutenticate==true}">
             <div id="notAutenticate">
@@ -39,7 +34,8 @@
             </div>
         </c:if>
         <c:if test="${notAutenticate!=true}">
-            <jsp:include page="nuovopost.jsp"/>
+            <div id="divPost">
+                <jsp:include page="nuovopost.jsp"/>
                 <c:forEach var="post" items="${posts}">
                     <div id="divPost1">
                         <c:set var="user" value="${utente}" scope="request"/>  
@@ -49,13 +45,15 @@
                             <p>${post.content}</p>
                         </c:if>
                         <c:if test="${post.postType == 'LINK'}">
-                            <a href="${post.content}">Link</a>
+                            <a href="${post.content}">${post.content}</a>
                         </c:if>
                         <c:if test="${post.postType == 'IMAGE'}">
                             <img class="ProfPic" alt="Foto del post" src="${post.content}"> 
                         </c:if>
                     </div>
-                </c:forEach> 
+                </c:forEach>
+            </div>
+             
         </c:if>
 
     </body>

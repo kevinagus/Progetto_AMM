@@ -93,8 +93,8 @@ public class PostFactory {
             //connessione al DB
             Connection conn=DriverManager.getConnection(connectionString,"nerd","nerd");
             
-            String query="select * from post" +
-                         "join posttype on post.tipo=posttype.type_id"+
+            String query="select * from post " +
+                         "join posttype on post.tipo=posttype.type_id "+
                          "where post_id=?";
             
             //Prepared Statement
@@ -152,8 +152,8 @@ public class PostFactory {
         try{
             Connection conn= DriverManager.getConnection(connectionString, "nerd", "nerd");
             
-            String query="select * from post"+
-                         "join posttype on post.tipo=posttype.type_id"+
+            String query="select * from post "+
+                         "join posttype on post.tipo=posttype.type_id "+
                          "where autore=?";
             
             //Prepared Statement
@@ -210,7 +210,7 @@ public class PostFactory {
         try{
             Connection conn= DriverManager.getConnection(connectionString,"nerd","nerd");
             
-            String query="insert into post (post_id,autore,tipo,content)"+
+            String query="insert into post (post_id,autore,tipo,content) "+
                          "values (default, ? , ? , ? )";
             
             PreparedStatement stmt=conn.prepareStatement(query);
@@ -229,6 +229,26 @@ public class PostFactory {
             e.printStackTrace();
         }
     }
+    
+    public void deletePosts(Utente user){
+        try{
+            Connection conn= DriverManager.getConnection(connectionString,"nerd","nerd");
+            
+            String query="delete from post where autore=?";
+            
+            PreparedStatement stmt=conn.prepareStatement(query);
+            
+            //associazione valori
+            stmt.setInt(1,user.getId());
+            
+            //esecuzione della query
+            stmt.executeUpdate();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+            
     
     private Post.Type postTypeFromString(String type){
         if(type.equals("IMAGE"))

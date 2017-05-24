@@ -25,9 +25,15 @@ img{
     border-style:solid;
     width:205px;
     padding-left: 10px;
+    padding-bottom: 100%;
     margin-top:10px;
-    margin-left:10px;
+    margin-left:-228px;
+    margin-bottom:20px;
     float: left;
+}
+
+#userLogged{
+    font-size: 15px;
 }
 
 #utenti li{
@@ -128,17 +134,17 @@ p{
     color: #006600;
 }
 
-#logout{
-    background-color: white;
-    border-style:solid;
-    text-align: center;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-}
-
 .button{
     background-color:#006600;
+    color:white;
+    width: 62%;
+    margin-top:20px;
+    height: 28px;
+}
+
+.deletebutton{
+    margin-top:100px;
+    background-color:#990000;
     color:white;
     width: 62%;
     margin-top:20px;
@@ -244,13 +250,10 @@ textarea:focus{
 }
 
 #newPost{
-    background-color: white;
-    border-radius: 5px;
-    float:left;
-    border-style: solid;
+    display:inline-block;
     padding: 2%;
-    margin-left:10px;
     margin-top:10px;
+    margin-left:30%;
     margin-bottom: 10px;
     width: 51%;
     font-weight:bold;
@@ -269,11 +272,10 @@ textarea:focus{
     background-color: white;
     margin-bottom: 10px;
     margin-top:10px;
-    display: inline-block;
+    display:block;
     padding: 2%;
     border-style: solid;
     text-align: left;
-    margin-left: 230px;
 }
 
 #divSom{
@@ -394,7 +396,10 @@ label{
     }
     
     #utenti{
-        display:none;
+        margin-left:10px;
+        padding-bottom:10px;
+        margin-bottom:20px;
+        width:90%;
     }
 }
 
@@ -414,6 +419,16 @@ label{
         margin-bottom:10px;
         padding: 3%;
         background-color: white;
+    }
+    
+    #utenti{
+        margin-left: 1px;
+        margin-bottom: 20px;
+        width: 140px;
+    }
+    
+    #newPost{
+        width: 100%;
     }
     
     #divAccesso{
@@ -453,8 +468,9 @@ label{
     }
     
     nav{
-        margin-left:180px;
+        margin-left:240px;
         height:60px;
+        text-align: left;
     }
     
     #divPost{

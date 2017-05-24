@@ -21,7 +21,7 @@
             
             <div id="divPost">
                 <div>
-                    <h2>Nuovo Post</h2>
+                    <h3>Nuovo Post</h3>
                 </div>
                 <div class="postType">
                     <label for="postType">Post di Testo</label>

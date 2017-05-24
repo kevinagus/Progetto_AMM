@@ -7,6 +7,7 @@ package amm.nerdbook;
 
 import amm.nerdbook.Classi.Utente;
 import amm.nerdbook.Classi.UtenteFactory;
+import amm.nerdbook.Classi.PostFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -44,7 +45,38 @@ public class Profilo extends HttpServlet {
         
         if(session.getAttribute("loggedIn") != null &&
            session.getAttribute("loggedIn").equals(true))
-        {                     
+        {     
+             int userID = -1;
+            //attraverso l'id dell'utente attualmente loggato recupero le sue info
+            //e setto l'attributo 'userLoggato'
+            Integer loggedUserID = (Integer) session.getAttribute("loggedUserID");
+            userID = loggedUserID;
+            Utente user = UtenteFactory.getInstance().getUtenteById(userID);
+            session.setAttribute("userLoggato", user);
+            
+            
+            String delete=request.getParameter("delete");
+            int del=-1;
+            if(delete!=null)
+            {
+                del=Integer.parseInt(delete);
+            }
+            
+            if(del==1){          
+                //cancello i post dell'utente presenti sulla bacheca
+                PostFactory.getInstance().deletePosts(user);
+                //cancello l'utente dal DB
+                UtenteFactory.getInstance().deleteUtente(user);
+                //imposto a null una serie di attributi propri dell'utente loggato
+                session.setAttribute("loggedIn",null);
+                session.setAttribute("userLoggato", null);
+                session.setAttribute("loggedUserID",-1);
+                
+                //reindirizzo alla pagina di login
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+                return;
+            }
+            
             String username =request.getParameter("user");
             String password =request.getParameter("pawd");
             String cognome =request.getParameter("cognome");
@@ -57,8 +89,8 @@ public class Profilo extends HttpServlet {
                 return;
             }
             
-            int userId = UtenteFactory.getInstance().getIdByUserAndPassword(username, password);
-            Utente user = UtenteFactory.getInstance().getUtenteById(userId);
+            //int userId = UtenteFactory.getInstance().getIdByUserAndPassword(username, password);
+            //Utente user = UtenteFactory.getInstance().getUtenteById(userId);
             
             user.setNome(username);
             user.setCognome(cognome);
@@ -75,6 +107,7 @@ public class Profilo extends HttpServlet {
             } else {
                 //l’utente è autenticato, mostra i dati inseriti dopo l'aggiornamento
                 session.setAttribute("visualizeData", true);
+                
                 request.setAttribute("utente", user);
                 request.getRequestDispatcher("profilo.jsp").forward(request, response);
                 return;

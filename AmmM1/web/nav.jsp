@@ -24,5 +24,10 @@
             <c:if test="${page!='profilo'}">class="other"</c:if> >
             <a href="Profilo">Profilo</a>
         </li>
+        <c:if test="${not empty userLoggato }">
+            <li>
+                <p id="userLogged">${userLoggato.nome} ${userLoggato.cognome} - <a href="Login?logout=1">Logout</a></p>
+            </li>
+        </c:if>
     </ul>
 </nav>

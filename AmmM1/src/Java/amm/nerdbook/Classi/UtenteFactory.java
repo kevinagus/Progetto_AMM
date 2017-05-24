@@ -78,7 +78,7 @@ public class UtenteFactory {
         try{
             Connection conn=DriverManager.getConnection(connectionString,"nerd","nerd");
             
-            String query="select * from utente"+"where id=?";
+            String query="select * from utente "+"where id=?";
             
             //Prepared Statement
             PreparedStatement stmt=conn.prepareStatement(query);
@@ -126,7 +126,7 @@ public class UtenteFactory {
             //percorso, username, password
             Connection conn=DriverManager.getConnection(connectionString, "nerd" , "nerd" );
             
-            String query="select id from utente"+
+            String query="select id from utente "+
                          "where nome=? and password=?";
             
             //Prepared Statement
@@ -202,14 +202,41 @@ public class UtenteFactory {
                 listaUtenti.add(corrente);
             }
             
+            stmt.close();
+            conn.close();
+            
         }catch(SQLException e){
             e.printStackTrace();
         }
         
         //ritorno la lista degli utenti
         return listaUtenti;
-        /*
-        return this.listaUtenti;
-        */
-}
+
+    }
+    
+    public void deleteUtente(Utente user)
+    {
+        if(user!=null){
+            try{
+                Connection conn= DriverManager.getConnection(connectionString,"nerd","nerd");
+
+                String query="delete from utente "+
+                                "where id=? and nome=?";
+                
+                PreparedStatement stmt=conn.prepareStatement(query);
+
+                stmt.setInt(1, user.getId());
+                stmt.setString(2, user.getNome());
+                
+                int res=stmt.executeUpdate();
+                
+                stmt.close();
+                conn.close();
+                       
+            }
+            catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
+    }
 }
