@@ -239,4 +239,34 @@ public class UtenteFactory {
             }
         }
     }
+    
+    public void updateUtente(Utente user)
+    {
+        if(user!=null)
+        {
+            try {
+                Connection conn = DriverManager.getConnection(connectionString, "nerd", "nerd");
+                String query =  "update utente set nome=? ,cognome=? "+
+                                ",urlfoto=? ,frase=? "+
+                                "where id=? and password=?";
+                
+                PreparedStatement stmt = conn.prepareStatement(query);
+                
+                stmt.setString(1,user.getNome());
+                stmt.setString(2,user.getCognome());
+                stmt.setString(3,user.getUrlFotoProfilo());
+                stmt.setString(4,user.getFrase());
+                stmt.setInt(5,user.getId());
+                stmt.setString(6,user.getPassword());
+                
+                int res=stmt.executeUpdate();
+                
+                stmt.close();
+                conn.close();
+                
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
+    }
 }

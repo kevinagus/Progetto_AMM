@@ -89,8 +89,6 @@ public class Profilo extends HttpServlet {
                 return;
             }
             
-            //int userId = UtenteFactory.getInstance().getIdByUserAndPassword(username, password);
-            //Utente user = UtenteFactory.getInstance().getUtenteById(userId);
             
             user.setNome(username);
             user.setCognome(cognome);
@@ -107,7 +105,8 @@ public class Profilo extends HttpServlet {
             } else {
                 //l’utente è autenticato, mostra i dati inseriti dopo l'aggiornamento
                 session.setAttribute("visualizeData", true);
-                
+                //aggiorno i dati dell'utente all'interno del DB
+                UtenteFactory.getInstance().updateUtente(user);
                 request.setAttribute("utente", user);
                 request.getRequestDispatcher("profilo.jsp").forward(request, response);
                 return;
