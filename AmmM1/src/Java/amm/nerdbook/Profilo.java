@@ -9,7 +9,6 @@ import amm.nerdbook.Classi.Utente;
 import amm.nerdbook.Classi.UtenteFactory;
 import amm.nerdbook.Classi.PostFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -82,6 +81,7 @@ public class Profilo extends HttpServlet {
             String cognome =request.getParameter("cognome");
             String url =request.getParameter("url");
             String frase =request.getParameter("frase");
+            String data=request.getParameter("data");
             
             if(username==null && password==null)
             {
@@ -94,6 +94,7 @@ public class Profilo extends HttpServlet {
             user.setCognome(cognome);
             user.setUrlFotoProfilo(url);
             user.setFrase(frase);
+            user.setDataDiNascita(data);
             
             //l'utente è autenticato ed ha inserito i dati del suo profilo,quindi li visualizzo 
             if(user.getNome().equals("") || user.getCognome().equals("") || 

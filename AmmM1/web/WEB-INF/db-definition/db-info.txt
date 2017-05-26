@@ -6,32 +6,32 @@ Password: nerd
 
 Task 1
 
-Entità: UTENTE
+Entitï¿½: UTENTE
 Attributi:
-•	Id , tipo intero; (chiave primaria)
-•	Nome, tipo stringa;
-•	Cognome, tipo stringa;
-•	Url foto profilo, tipo stringa;
-•	Frase, tipo stringa;
-•	Password, tipo stringa;
-•	Data di nascita, tipo stringa;
+ï¿½	Id , tipo intero; (chiave primaria)
+ï¿½	Nome, tipo stringa;
+ï¿½	Cognome, tipo stringa;
+ï¿½	Url foto profilo, tipo stringa;
+ï¿½	Frase, tipo stringa;
+ï¿½	Password, tipo stringa;
+ï¿½	Data di nascita, tipo DATA;
 
-Entità: POST
+Entitï¿½: POST
 Attributi:
-•	Id, tipo intero; (chiave primaria)
-•	User, tipo Utente; 
-•	Contenuto, tipo stringa;
-•	Immagine, tipo stringa;
-•	Tipo post, tipo stringa;
+ï¿½	Id, tipo intero; (chiave primaria)
+ï¿½	User, tipo Utente; 
+ï¿½	Contenuto, tipo stringa;
+ï¿½	Immagine, tipo stringa;
+ï¿½	Tipo post, tipo stringa;
 
-Entità: POSTTYPE
+Entitï¿½: POSTTYPE
 Attributi:
-•	Id,tipo intero;(chiave primaria)
-•	Nome,tipo stringa;--> indica il tipo di post
+ï¿½	Id,tipo intero;(chiave primaria)
+ï¿½	Nome,tipo stringa;--> indica il tipo di post
 
 
 Relazioni:
-1.	Attributo User tabella Post collegato attraverso l’attributo id con un utente nella tabella Utente, relazione molti ad uno poiché un utente può pubblicare diversi post.
+1.	Attributo User tabella Post collegato attraverso lï¿½attributo id con un utente nella tabella Utente, relazione molti ad uno poichï¿½ un utente puï¿½ pubblicare diversi post.
 POST.user-->UTENTE.id
-2.	Attributo Tipo tabella Post collegato attraverso l’attributo id ad un tipo di post nella tabella Posttype: anche in questo caso la relazione è da molti a uno, poiché diversi post possono essere di uno stesso tipo ad esempio di tipo testo o link.  
+2.	Attributo Tipo tabella Post collegato attraverso lï¿½attributo id ad un tipo di post nella tabella Posttype: anche in questo caso la relazione ï¿½ da molti a uno, poichï¿½ diversi post possono essere di uno stesso tipo ad esempio di tipo testo o link.  
 POST.tipo-->POSTTYPE.id

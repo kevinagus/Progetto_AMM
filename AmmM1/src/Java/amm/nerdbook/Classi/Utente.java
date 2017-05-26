@@ -5,6 +5,7 @@
  */
 package amm.nerdbook.Classi;
 
+
 /**
  *
  * @author Kevin
@@ -113,6 +114,14 @@ public class Utente {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public void setDataDiNascita(String data){
+        this.dataDiNascita=data;
+    }
+    
+    public String getDataDiNascita(){
+        return this.dataDiNascita;
     }
     
     @Override

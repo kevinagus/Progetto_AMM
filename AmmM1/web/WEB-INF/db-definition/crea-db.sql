@@ -36,29 +36,32 @@ CREATE TABLE post(
     FOREIGN KEY (tipo) REFERENCES posttype(type_id));
 
 --Popolamento tabella UTENTE
-INSERT INTO utente(id,nome,cognome,urlfoto,frase,password)
+INSERT INTO utente(id,nome,cognome,urlfoto,frase,password,nascita)
 VALUES(default,
         'Lorenzo',
         'Maioli',
         'img/maioli.jpg',
         'Felice di esser qui',
-        'ciao');
+        'ciao',
+        '1993-09-01');
 
-INSERT INTO utente(id,nome,cognome,urlfoto,frase,password)
+INSERT INTO utente(id,nome,cognome,urlfoto,frase,password,nascita)
 VALUES(default,
         'Guido',
         'Vettel',
         'img/vettel.jpg',
         'Fantastico',
-        'ehitu');
+        'ehitu',
+        '1996-07-05');
 
-INSERT INTO utente(id,nome,cognome,urlfoto,frase,password)
+INSERT INTO utente(id,nome,cognome,urlfoto,frase,password,nascita)
 VALUES(default,
         'Fernando',
         'Rana',
         'img/rana.jpg',
         'ciao a tutti',
-        'pasta');
+        'pasta',
+        '1966-01-05');
 
 --Popolamento tabella POSTTYPE
 INSERT INTO posttype (type_id,post_name)

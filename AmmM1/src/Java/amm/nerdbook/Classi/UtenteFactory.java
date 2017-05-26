@@ -6,10 +6,13 @@
 package amm.nerdbook.Classi;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -41,36 +44,6 @@ public class UtenteFactory {
     }
 
     private UtenteFactory() {
-        /*
-        Utente user1 = new Utente();
-        user1.setId(1);
-        user1.setNome("Lorenzo");
-        user1.setCognome("Rossi");
-        user1.setPassword("ciao");
-        user1.setUrlFotoProfilo("");
-        user1.setFrase("Felice d'esser qui.");
-        
-        
-        Utente user2 = new Utente();
-        user2.setId(2);
-        user2.setNome("Guido");
-        user2.setCognome("Frau");
-        user2.setPassword("ehitu");
-        user2.setUrlFotoProfilo("img/maioli.jpg");
-        user2.setFrase("Fantastico.");
-
-        Utente user3 = new Utente();
-        user3.setId(3);
-        user3.setNome("Fernando");
-        user3.setCognome("Firinu");
-        user3.setPassword("tavolo");
-        user3.setUrlFotoProfilo("img/rana.jpg");
-        user3.setFrase("Meraviglioso.");
-        
-        listaUtenti.add(user1);
-        listaUtenti.add(user2);
-        listaUtenti.add(user3);
-        */
     }
 
     public Utente getUtenteById(int id) {
@@ -246,18 +219,22 @@ public class UtenteFactory {
         {
             try {
                 Connection conn = DriverManager.getConnection(connectionString, "nerd", "nerd");
+                
                 String query =  "update utente set nome=? ,cognome=? "+
-                                ",urlfoto=? ,frase=? "+
+                                ",urlfoto=? ,frase=? ,nascita=? "+
                                 "where id=? and password=?";
                 
                 PreparedStatement stmt = conn.prepareStatement(query);
+                
+                Date data=Date.valueOf(user.getDataDiNascita());
                 
                 stmt.setString(1,user.getNome());
                 stmt.setString(2,user.getCognome());
                 stmt.setString(3,user.getUrlFotoProfilo());
                 stmt.setString(4,user.getFrase());
-                stmt.setInt(5,user.getId());
-                stmt.setString(6,user.getPassword());
+                stmt.setDate(5,data);
+                stmt.setInt(6,user.getId());
+                stmt.setString(7,user.getPassword());
                 
                 int res=stmt.executeUpdate();
                 

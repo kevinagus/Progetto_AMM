@@ -52,6 +52,10 @@
                         <strong>Frase di presentazione:</strong>
                         ${utente.frase}
                     </div>
+                    <div id="divData">
+                        <strong>Data di nascita:</strong>
+                        ${utente.dataDiNascita}
+                    </div>
             </c:if> 
             
             <c:if test="${notAutenticate==true}">
