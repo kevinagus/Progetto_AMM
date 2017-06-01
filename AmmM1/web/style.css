@@ -19,6 +19,28 @@ img{
     border-radius: 8px;
 }
 
+#buttonSearch{
+    background-color:#006600;
+    color:white;
+    width: 120px;
+    height: 25px;
+    font-family:"monospace",Arial;
+    font-weight:bold;
+    font-size: 16px;
+}
+
+#searchUser{
+    margin-bottom: 40px;
+}
+
+#searchField{
+    
+    background-color: white;
+    color:black;
+    margin-top:10px;
+    width: 120px;
+}
+
 #utenti{
     border-radius: 5px;
     background-color: white;

@@ -11,8 +11,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -71,6 +69,7 @@ public class UtenteFactory {
                 corrente.setUrlFotoProfilo(res.getString("urlfoto"));
                 corrente.setFrase(res.getString("frase"));
                 corrente.setPassword(res.getString("password"));
+                corrente.setDataDiNascita(res.getDate("nascita").toString());
                 
                 stmt.close();
                 conn.close();
@@ -163,13 +162,17 @@ public class UtenteFactory {
                 //imposto il cognome dell'utente
                 corrente.setCognome(res.getString("cognome"));
                 
+                //imposto l'url foto profilo
+                corrente.setUrlFotoProfilo(res.getString("urlfoto"));
+                
                 //imposto la frase dell'utente
                 corrente.setFrase(res.getString("frase"));
                 
                 //imposto la password dell'utente
-                corrente.setPassword("password");
+                corrente.setPassword(res.getString("password"));
                 
-                //manca da impostare la data
+                //imposta la data di nascita
+                corrente.setDataDiNascita(res.getDate("nascita").toString());
                 
                 //aggiungo l'utente alla lista
                 listaUtenti.add(corrente);
