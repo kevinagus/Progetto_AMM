@@ -7,14 +7,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div id="utenti">
-    <%-- devi pensare ad una condizione che visualizzi questa barra di ricerca solo per la bacheca --%>
-    <div id="searchUser">
-        <input id="searchField" type="text" placeholder="Cerca amico..">
-        <button id="buttonSearch">Ricerca</button>
-    </div>
+    <%-- se l'utente si trova nella pagina Bacheca l'attributo search è true--%>
+    <c:if test="${search==true}">
+        <div id="searchUser">
+            <input id="searchField" type="text" placeholder="Cerca amico.." value="">
+            <button id="buttonSearch">Ricerca</button>
+        </div>
+    </c:if>
     
     <h2>Utenti</h2>
-    <ul>
+    <ul id="usersList">
         <c:forEach var="user" items="${users}">
             <li class="picutente"><a href="Bacheca?utente=${user.id}" >${user.nome} ${user.cognome}</a></li>
         </c:forEach>

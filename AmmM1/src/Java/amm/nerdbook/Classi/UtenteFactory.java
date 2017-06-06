@@ -190,6 +190,66 @@ public class UtenteFactory {
 
     }
     
+    public ArrayList<Utente> getListaUtenti(String name){
+        ArrayList<Utente> listaUtenti = new ArrayList<Utente>();
+        
+        try{
+            //connessione al DB
+            Connection conn= DriverManager.getConnection(connectionString,"nerd","nerd");
+            
+            String query="select * from utente where nome like ? or cognome like ? ";
+            
+            //Prepared Statemente
+            PreparedStatement stmt=conn.prepareStatement(query);
+            
+            //associo i valori
+            stmt.setString(1, "%" + name + "%");
+            stmt.setString(2, "%" + name + "%");
+            
+            //eseguo la query
+            ResultSet res=stmt.executeQuery();
+            
+            //ciclo sulle righe restituite
+            while(res.next()){
+                Utente corrente=new Utente();
+                
+                //imposto id dell'utente
+                corrente.setId(res.getInt("id"));
+                
+                //imposto il nome dell'utente
+                corrente.setNome(res.getString("nome"));
+                
+                //imposto il cognome dell'utente
+                corrente.setCognome(res.getString("cognome"));
+                
+                //imposto l'url foto profilo
+                corrente.setUrlFotoProfilo(res.getString("urlfoto"));
+                
+                //imposto la frase dell'utente
+                corrente.setFrase(res.getString("frase"));
+                
+                //imposto la password dell'utente
+                corrente.setPassword(res.getString("password"));
+                
+                //imposta la data di nascita
+                corrente.setDataDiNascita(res.getDate("nascita").toString());
+                
+                //aggiungo l'utente alla lista
+                listaUtenti.add(corrente);
+            }
+            
+            stmt.close();
+            conn.close();
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        //ritorno la lista degli utenti
+        return listaUtenti;
+
+    }
+    
     public void deleteUtente(Utente user)
     {
         if(user!=null){

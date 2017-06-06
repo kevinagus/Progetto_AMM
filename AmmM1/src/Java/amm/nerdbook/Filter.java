@@ -5,12 +5,16 @@
  */
 package amm.nerdbook;
 
+import amm.nerdbook.Classi.Utente;
+import amm.nerdbook.Classi.UtenteFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,7 +34,28 @@ public class Filter extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+     
+        HttpSession session = request.getSession(false);
         
+        if (session != null && session.getAttribute("loggedIn") != null
+                && session.getAttribute("loggedIn").equals(true)) {
+            
+            String name=request.getParameter("q");
+            
+            if(name!=null){
+                ArrayList<Utente> listaUtenti = UtenteFactory.getInstance().getListaUtenti(name);
+                
+                request.setAttribute("users",listaUtenti);
+                
+                //restituisco del json dal server quindi va segnalato 
+                response.setContentType("application/json");
+                response.setHeader("Expires", "Sat, 6 May 1995 12:00:00 GMT");
+                response.setHeader("Cache-Control", "no-store, no-cache, "
+                        + "must-revalidate");
+                
+                request.getRequestDispatcher("listaUtentiJson.jsp").forward(request,response);
+            }
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

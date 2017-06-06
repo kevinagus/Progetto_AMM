@@ -67,6 +67,7 @@ public class Bacheca extends HttpServlet {
 
                 request.setAttribute("utente", utente);
                 request.setAttribute("users", listaUtenti);
+                request.setAttribute("search",true);
 
                 List<Post> posts = PostFactory.getInstance().getPostList(utente);
                 request.setAttribute("posts", posts);
