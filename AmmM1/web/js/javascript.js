@@ -31,6 +31,25 @@ function stateFailure(data, state) {
 }
 
 $(document).ready(function(){
+    
+    $("#searchField").on('keyup',function(){
+        var wantedUser = $("#searchField")[0].value;
+        
+        $.ajax({
+            url: "filter.json",
+            data:{
+                q:wantedUser
+            },
+            dataType:"json",
+            success: function(data, state){
+                stateSuccess(data)
+            },
+            error: function(data, state){
+                stateFailure(data, state)
+            }
+        });
+    })
+    
     $("#buttonSearch").click(function(){
         
         var wantedUser = $("#searchField")[0].value;

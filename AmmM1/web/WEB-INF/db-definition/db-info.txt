@@ -1,4 +1,4 @@
---Database--
+﻿--Database--
 Name: ammdb
 Username: nerd
 Password: nerd
@@ -6,32 +6,51 @@ Password: nerd
 
 Task 1
 
-Entit�: UTENTE
+Entita': UTENTE
 Attributi:
-�	Id , tipo intero; (chiave primaria)
-�	Nome, tipo stringa;
-�	Cognome, tipo stringa;
-�	Url foto profilo, tipo stringa;
-�	Frase, tipo stringa;
-�	Password, tipo stringa;
-�	Data di nascita, tipo DATA;
+-	Id , tipo intero; (chiave primaria)
+-	Nome, tipo stringa;
+-	Cognome, tipo stringa;
+-	Url foto profilo, tipo stringa;
+-	Frase, tipo stringa;
+-	Password, tipo stringa;
+-	Data di nascita, tipo DATA;
+-	Gruppo, tipo intero;
 
-Entit�: POST
+Entita': GRUPPO
 Attributi:
-�	Id, tipo intero; (chiave primaria)
-�	User, tipo Utente; 
-�	Contenuto, tipo stringa;
-�	Immagine, tipo stringa;
-�	Tipo post, tipo stringa;
+-	Id, tipo intero;(chiave primaria)
+-	Nome, tipo stringa;
 
-Entit�: POSTTYPE
+Entita': POST
 Attributi:
-�	Id,tipo intero;(chiave primaria)
-�	Nome,tipo stringa;--> indica il tipo di post
+-	Id, tipo intero; (chiave primaria)
+-	User, tipo Utente; 
+-	Contenuto, tipo stringa;
+-	Immagine, tipo stringa;
+-	Tipo post, tipo intero;
 
+Entita': POSTTYPE
+Attributi:
+-	Id,tipo intero;(chiave primaria)
+-	Nome,tipo stringa;	--> indica il tipo di post
+
+Entita': HEARTS
+Attributi:
+-       Follower,tipo intero;
+-       Followed,tipo intero;
+-       (Follower,Followed), chiave primaria;
 
 Relazioni:
-1.	Attributo User tabella Post collegato attraverso l�attributo id con un utente nella tabella Utente, relazione molti ad uno poich� un utente pu� pubblicare diversi post.
-POST.user-->UTENTE.id
-2.	Attributo Tipo tabella Post collegato attraverso l�attributo id ad un tipo di post nella tabella Posttype: anche in questo caso la relazione � da molti a uno, poich� diversi post possono essere di uno stesso tipo ad esempio di tipo testo o link.  
-POST.tipo-->POSTTYPE.id
+1.	Attributo User tabella POST collegato attraverso l'attributo id con un utente nella tabella UTENTE, relazione molti ad uno poiche' un utente puo' pubblicare diversi post.
+	POST.user-->UTENTE.id
+
+2.	Attributo Tipo tabella POST collegato attraverso l'attributo id ad un tipo di post nella tabella POSTTYPE: anche in questo caso la relazione sara' da molti a uno, poiche' diversi post possono essere di uno stesso tipo ad esempio di tipo testo o link.  		
+	POST.tipo-->POSTTYPE.id
+
+3.	Attributo  Gruppo tabella UTENTE collegato attraverso l'attributo id con un gruppo nella tabella GRUPPO, relazione uno a uno infatti un utente può appartenere ad un unico gruppo.
+	UTENTE.gruppo-->GRUPPO.id
+
+4.      Attributo Follower tabella HEARTS collegato attraverso l'attributo id con un utente nella tabella UTENTE, relazione molti a molti, utenti possono seguire altri utenti. 
+
+5.      Attributo Followed tabella HEARTS collegato attraverso l'attributo id con un utente nella tabella UTENTE, relazione molti a molti, utenti possono essere seguiti da altri utenti.

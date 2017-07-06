@@ -7,11 +7,12 @@ package amm.nerdbook;
 
 import amm.nerdbook.Classi.Utente;
 import amm.nerdbook.Classi.UtenteFactory;
+import amm.nerdbook.Classi.Gruppo;
+import amm.nerdbook.Classi.GruppoFactory;
 import amm.nerdbook.Classi.Post;
 import amm.nerdbook.Classi.PostFactory;
-import java.util.ArrayList;
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +45,7 @@ public class Bacheca extends HttpServlet {
         if (session != null && session.getAttribute("loggedIn") != null
                 && session.getAttribute("loggedIn").equals(true)) {
             int userID = -1;
+            int groupID = -1;
             //attraverso l'id dell'utente attualmente loggato recupero le sue info
             //e setto l'attributo 'userLoggato'
             Integer loggedUserID = (Integer) session.getAttribute("loggedUserID");
@@ -55,22 +57,55 @@ public class Bacheca extends HttpServlet {
             //controllo se è impostato il parametro get "user" che mi consente
             //di visualizzare la bacheca di uno specifico utente.
             String user = request.getParameter("utente");
-
+            String group= request.getParameter("gruppo");
+            
             if (user != null) {
                 userID = Integer.parseInt(user);
             }
-
+            else if(group!=null){
+                groupID= Integer.parseInt(group); 
+                request.setAttribute("displayGroup",true);
+            }
+            
+            Gruppo grp = GruppoFactory.getInstance().getGruppoById(groupID);             
             Utente utente = UtenteFactory.getInstance().getUtenteById(userID);
-            ArrayList<Utente> listaUtenti = UtenteFactory.getInstance().getListaUtenti();
+            List<Utente> listaUtenti = UtenteFactory.getInstance().getListaUtenti();
+            List<Gruppo> listaGruppi = GruppoFactory.getInstance().getListaGruppi(); 
 
+            request.setAttribute("users", listaUtenti);
+            request.setAttribute("groups",listaGruppi);
+            request.setAttribute("search",true);
+            
+            if(grp!=null){
+                List<Post> posts = PostFactory.getInstance().getPostList(grp);
+                request.setAttribute("group",grp);
+                request.setAttribute("posts", posts);
+                request.getRequestDispatcher("bacheca.jsp").forward(request, response);
+                return;
+            }
+            
             if (utente != null) {
 
                 request.setAttribute("utente", utente);
-                request.setAttribute("users", listaUtenti);
-                request.setAttribute("search",true);
 
                 List<Post> posts = PostFactory.getInstance().getPostList(utente);
                 request.setAttribute("posts", posts);
+                
+                //controllo se l'utente loggato al momento è amico con l'utente di cui
+                //si sta visualizzando la bacheca a condizione che i due utenti siano 
+                //distinti e non uguali
+                
+                if(! utente.equals(userLoggato)){
+                    if(UtenteFactory.getInstance().controlloAmicizia(userLoggato,utente)){
+                        request.setAttribute("amicizia",true);
+                    }
+                    else{
+                        request.setAttribute("amicizia",false);
+                    }                
+                }
+                else{
+                    request.setAttribute("amicizia",true);
+                }
                 
                 //controllo la presenza di un nuovo post che andrà quindi
                 //confermato dall'utente prima di salvarlo nel DB
@@ -88,21 +123,24 @@ public class Bacheca extends HttpServlet {
                 if (postType != null) {
                     Post newPost = new Post();
                     //imposto l'autore al nuovo post
-                    newPost.setUser(utente);
+                    newPost.setAutore(userLoggato);
+                    //imposto il proprietario del nuovo post
+                    newPost.setOwner(utente);
+                    //imposto il contenuto del post presente in tutte le tipologie
+                    newPost.setContent(request.getParameter("textPost"));
                     
                     if (postType.equals("text")) {
                         newPost.setPostType(Post.Type.TEXT);
-                        newPost.setContent(request.getParameter("textPost"));
                         request.setAttribute("Testo", true);
                     }
                     else if (postType.equals("img")) {
                         newPost.setPostType(Post.Type.IMAGE);
-                        newPost.setImage(request.getParameter("imgPost"));
+                        newPost.setUrl(request.getParameter("imgPost"));
                         request.setAttribute("Immagine", true);
                     }
                     else{
                         newPost.setPostType(Post.Type.LINK);
-                        newPost.setContent(request.getParameter("linkPost"));
+                        newPost.setUrl(request.getParameter("linkPost"));
                         request.setAttribute("Link", true);
                     }
                     //aggiungo il nuovo post al DB attraverso il metodo addNewPost
@@ -117,7 +155,7 @@ public class Bacheca extends HttpServlet {
                 }
        
                 request.getRequestDispatcher("bacheca.jsp").forward(request, response);
-            } else {
+            }else{
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
         } else {

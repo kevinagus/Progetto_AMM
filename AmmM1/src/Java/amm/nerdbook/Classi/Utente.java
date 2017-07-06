@@ -19,6 +19,7 @@ public class Utente {
     private String frase;
     private String password;
     private String dataDiNascita;
+    private int gruppo;
     
     
     

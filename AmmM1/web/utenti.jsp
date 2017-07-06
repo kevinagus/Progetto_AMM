@@ -21,4 +21,13 @@
             <li class="picutente"><a href="Bacheca?utente=${user.id}" >${user.nome} ${user.cognome}</a></li>
         </c:forEach>
     </ul>
+
+    <h2>Gruppi</h2>
+    <ul id="groupList">
+        <c:forEach var="group" items="${groups}">
+            <li class="picgroup"><a href="Bacheca?gruppo=${group.getId()}">${group.getNome()}</a></li>
+        </c:forEach>
+    </ul>
 </div>
+
+

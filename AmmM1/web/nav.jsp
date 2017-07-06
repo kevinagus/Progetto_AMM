@@ -26,7 +26,7 @@
         </li>
         <c:if test="${not empty userLoggato }">
             <li>
-                <p id="userLogged">${userLoggato.nome} ${userLoggato.cognome} - <a href="Login?logout=1">Logout</a></p>
+                <p id="userLogged" class="picutente">${userLoggato.nome} ${userLoggato.cognome} - <a href="Login?logout=1">Logout</a></p>
             </li>
         </c:if>
     </ul>

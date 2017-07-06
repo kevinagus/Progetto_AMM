@@ -71,10 +71,10 @@
                         </c:if>
                         <c:if test="${Immagine==true}">
                             <p>Immagine:</p>
-                            <img class="ProfPic" alt="foto del post" src="${post.getImage()}">
+                            <img class="ProfPic" alt="foto del post" src="${post.url}">
                         </c:if>
                         <c:if test="${Link==true}">
-                            <p>Link: ${post.content}</p>
+                            <p>Link: ${post.url}</p>
                         </c:if>            
                     </div>
                     <button class="button" type="submit">Conferma Post</button>

@@ -35,22 +35,37 @@
                 Utente non autenticato. Accesso negato.
             </div>
         </c:if>
-        <c:if test="${notAutenticate!=true}">
+        <c:if test="${displayGroup==true}">
+            <jsp:include page="group_posts.jsp"/>
+        </c:if>
+        <c:if test="${notAutenticate!=true && displayGroup!=true}">
+            <c:set var="user" value="${utente}" scope="request"/> 
+            <div id="titoloBacheca">
+                <h2>${user.nome} ${user.cognome}</h2>
+                <img class="BachecaPic" alt="Foto profilo" src="${user.urlFotoProfilo}"> 
+                <p>- ${user.frase} -</p>
+            </div>          
             <div id="divPost">
-                <jsp:include page="nuovopost.jsp"/>
+                <c:if test="${amicizia==true}">
+                    <c:if test="${userLoggato.id != utente.id}">
+                        <p id="amici">Hai stretto amicizia con ${utente.nome} ${utente.cognome}</p>
+                    </c:if>
+                    <jsp:include page="nuovopost.jsp"/>
+                </c:if>
+                <c:if test="${amicizia!=true}">
+                    <p id="amici">Non hai ancora stretto amicizia con ${utente.nome} ${utente.cognome}</p>
+                </c:if>
                 <c:forEach var="post" items="${posts}">
-                    <div id="divPost1">
-                        <c:set var="user" value="${utente}" scope="request"/>  
-                        <h3>${user.nome} ${user.cognome}</h3>
+                    <div id="divPosts"> 
+                        <h3>${post.autore.nome} ${post.autore.cognome}</h3>
                 
-                        <c:if test="${post.postType == 'TEXT'}">
-                            <p>${post.content}</p>
-                        </c:if>
+                        <p>${post.content}</p>
+                        
                         <c:if test="${post.postType == 'LINK'}">
-                            <a href="${post.content}">${post.content}</a>
+                            <a href="${post.url}">${post.url}</a>
                         </c:if>
                         <c:if test="${post.postType == 'IMAGE'}">
-                            <img class="ProfPic" alt="Foto del post" src="${post.content}"> 
+                            <img class="ProfPic" alt="Foto del post" src="${post.url}"> 
                         </c:if>
                     </div>
                 </c:forEach>

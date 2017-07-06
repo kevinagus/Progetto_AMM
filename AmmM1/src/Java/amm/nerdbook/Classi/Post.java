@@ -16,15 +16,18 @@ public class Post {
     };
     
     protected int id;
-    protected Utente user;
+    protected Utente owner;
+    protected Utente autore;
     private String content;
-    private String img;
+    private String url;
     private Type postType;
     
     public Post(){
         id = 0;
-        user = null;
+        owner = null;
+        autore=null;
         content = "";
+        url="";
         postType = Type.TEXT;
     }
     
@@ -45,15 +48,29 @@ public class Post {
     /**
      * @return the user
      */
-    public Utente getUser() {
-        return user;
+    public Utente getOwner() {
+        return owner;
     }
 
     /**
      * @param user the user to set
      */
-    public void setUser(Utente user) {
-        this.user = user;
+    public void setOwner(Utente user) {
+        this.owner = user;
+    }
+    
+      /**
+     * @return the user
+     */
+    public Utente getAutore() {
+        return autore;
+    }
+
+    /**
+     * @param user the user to set
+     */
+    public void setAutore(Utente user) {
+        this.autore = user;
     }
 
     /**
@@ -70,18 +87,18 @@ public class Post {
         this.content = content;
     }
     
-    /**
-     * @return the content
+     /**
+     * @return the url
      */
-    public String getImage() {
-        return img;
+    public String getUrl() {
+        return url;
     }
 
     /**
-     * @param img the content to set
+     * @param url the url to set
      */
-    public void setImage(String img) {
-        this.img = img;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     /**

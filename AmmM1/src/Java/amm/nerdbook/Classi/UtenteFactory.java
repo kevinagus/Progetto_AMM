@@ -309,4 +309,28 @@ public class UtenteFactory {
             }
         }
     }
+    
+    public boolean controlloAmicizia(Utente user,Utente user2){
+        try{
+            Connection conn = DriverManager.getConnection(connectionString, "nerd", "nerd");
+            
+            String query =  "select * from hearts where follower=? and followed=?";
+                
+            PreparedStatement stmt = conn.prepareStatement(query);
+            
+            stmt.setInt(1, user.getId());
+            stmt.setInt(2, user2.getId());
+            
+            ResultSet res=stmt.executeQuery();
+
+            if(res.next()){
+                return true;
+            }
+                        
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return false;
+    }
 }

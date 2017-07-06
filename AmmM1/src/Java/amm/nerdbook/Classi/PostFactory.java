@@ -86,9 +86,7 @@ public class PostFactory {
         */
     }
 
-    public Post getPostById(int id) {
-        UtenteFactory utenteFactory=UtenteFactory.getInstance();
-        
+    public Post getPostById(int id) {        
         try{
             //connessione al DB
             Connection conn=DriverManager.getConnection(connectionString,"nerd","nerd");
@@ -116,7 +114,11 @@ public class PostFactory {
                 
                 //imposto l'autore del post
                 Utente autore=UtenteFactory.getInstance().getUtenteById(res.getInt("autore"));
-                corrente.setUser(autore);
+                corrente.setAutore(autore);
+                
+                //imposto il proprietario del post
+                Utente owner=UtenteFactory.getInstance().getUtenteById(res.getInt("owner"));
+                corrente.setOwner(owner);
                 
                 //imposto il tipo del post
                 corrente.setPostType(this.postTypeFromString(res.getString("post_name")));
@@ -145,16 +147,16 @@ public class PostFactory {
         
     }
 
-    public List getPostList(Utente user) {
+    public List<Post> getPostList(Utente user) {
         
-        List<Post> listaPost= new ArrayList<Post>();
+        List<Post> listaPost= new ArrayList<>();
         
         try{
             Connection conn= DriverManager.getConnection(connectionString, "nerd", "nerd");
             
             String query="select * from post "+
                          "join posttype on post.tipo=posttype.type_id "+
-                         "where autore=?";
+                         "where owner=?";
             
             //Prepared Statement
             PreparedStatement stmt=conn.prepareStatement(query);
@@ -174,13 +176,19 @@ public class PostFactory {
                 corrente.setId(res.getInt("post_id"));
                 
                 //imposto l'autore del post
-                corrente.setUser(user);
+                corrente.setAutore(UtenteFactory.getInstance().getUtenteById(res.getInt("autore")));
+                
+                //imposto il proprietario del post
+                corrente.setOwner(UtenteFactory.getInstance().getUtenteById(res.getInt("owner")));
                 
                 //imposto il tipo del post
                 corrente.setPostType(this.postTypeFromString(res.getString("post_name")));
                 
                 //imposto il contenuto del post
                 corrente.setContent(res.getString("content"));
+                
+                //imposto l'url del post
+                corrente.setUrl(res.getString("url"));
             
                 listaPost.add(corrente);
             }
@@ -206,21 +214,62 @@ public class PostFactory {
         */
     }
     
+    public List<Post> getPostList(Gruppo gr){
+        
+        List<Post> listaPost = new ArrayList<>();
+        try{
+                Connection conn= DriverManager.getConnection(connectionString,"nerd","nerd");
+
+                String query="select post.post_id,post.owner,post.autore,posttype.POST_NAME,post.content,post.URL from post join utente on post.autore=utente.id join gruppo on utente.gruppo=gruppo.GROUP_ID join posttype on post.tipo=posttype.TYPE_ID where gruppo.GROUP_ID=?";
+                
+                PreparedStatement stmt=conn.prepareStatement(query);
+                
+                stmt.setInt(1,gr.getId());
+                
+                ResultSet res=stmt.executeQuery();
+                
+                while(res.next()){
+                    Post p = new Post();
+                    
+                    p.setId(res.getInt("post_id"));
+                    p.setAutore(UtenteFactory.getInstance().getUtenteById(res.getInt("autore")));
+                    p.setOwner(UtenteFactory.getInstance().getUtenteById(res.getInt("owner")));
+                    p.setPostType(this.postTypeFromString(res.getString("post_name")));
+                    p.setContent(res.getString("content"));
+                    p.setUrl(res.getString("url"));
+                    
+                    listaPost.add(p);
+                }
+                
+                stmt.close();
+                conn.close();
+                
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return listaPost;
+    }
+    
     public void addNewPost(Post post){
         try{
             Connection conn= DriverManager.getConnection(connectionString,"nerd","nerd");
             
-            String query="insert into post (post_id,autore,tipo,content) "+
-                         "values (default, ? , ? , ? )";
+            String query="insert into post (post_id,autore,tipo,content,url,owner) "+
+                         "values (default, ? , ? , ? , ? , ?)";
             
             PreparedStatement stmt=conn.prepareStatement(query);
             
             //associazione valori
-            stmt.setInt(1,post.getUser().getId());
+            stmt.setInt(1,post.getAutore().getId());
             
             stmt.setInt(2,this.postTypeFromEnum(post.getPostType()));
             
             stmt.setString(3,post.getContent());
+            
+            stmt.setString(4,post.getUrl());
+            
+            stmt.setInt(5,post.getOwner().getId());
             
             //esecuzione della query
             stmt.executeUpdate();
@@ -234,7 +283,7 @@ public class PostFactory {
         try{
             Connection conn= DriverManager.getConnection(connectionString,"nerd","nerd");
             
-            String query="delete from post where autore=?";
+            String query="delete from post where owner=?";
             
             PreparedStatement stmt=conn.prepareStatement(query);
             

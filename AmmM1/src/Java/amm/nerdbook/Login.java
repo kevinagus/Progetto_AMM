@@ -7,6 +7,7 @@ package amm.nerdbook;
 
 import amm.nerdbook.Classi.PostFactory;
 import amm.nerdbook.Classi.UtenteFactory;
+import amm.nerdbook.Classi.GruppoFactory;
 import amm.nerdbook.Classi.Utente;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class Login extends HttpServlet {
         //IMPOSTO LA CONNECTION STRING PER OGNI FACTORY
         UtenteFactory.getInstance().setConnectionString(dbConnection);
         PostFactory.getInstance().setConnectionString(dbConnection);
+        GruppoFactory.getInstance().setConnectionString(dbConnection);
     }
     
     /**

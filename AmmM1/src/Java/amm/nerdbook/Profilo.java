@@ -7,9 +7,11 @@ package amm.nerdbook;
 
 import amm.nerdbook.Classi.Utente;
 import amm.nerdbook.Classi.UtenteFactory;
+import amm.nerdbook.Classi.Gruppo;
+import amm.nerdbook.Classi.GruppoFactory;
 import amm.nerdbook.Classi.PostFactory;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,9 +41,11 @@ public class Profilo extends HttpServlet {
         //non viene creata una nuova e dentro session non vi è niente
         HttpSession session = request.getSession(false);
         
-        ArrayList<Utente> listaUtenti = UtenteFactory.getInstance().getListaUtenti();
+        List<Utente> listaUtenti = UtenteFactory.getInstance().getListaUtenti();
+        List<Gruppo> listaGruppi = GruppoFactory.getInstance().getListaGruppi();
         request.setAttribute("users",listaUtenti); 
-        
+        request.setAttribute("groups",listaGruppi); 
+
         if(session.getAttribute("loggedIn") != null &&
            session.getAttribute("loggedIn").equals(true))
         {     
@@ -85,6 +89,7 @@ public class Profilo extends HttpServlet {
             
             if(username==null && password==null)
             {
+                request.setAttribute("visualizeData",false);
                 request.getRequestDispatcher("profilo.jsp").forward(request, response);
                 return;
             }
